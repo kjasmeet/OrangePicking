@@ -6,10 +6,12 @@
 
 package orangepickinggame;
  
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.*;
 /**
@@ -18,6 +20,8 @@ import org.newdawn.slick.tiled.*;
 public class OrangePickingGame extends BasicGame
 {
     private TiledMap map;
+    private Animation sprite, up, down, left, right;
+    private float x = 34f, y = 34f;
     public OrangePickingGame()
     {
         super("Pick oranges!");
@@ -41,6 +45,16 @@ public class OrangePickingGame extends BasicGame
     public void init(GameContainer container) throws SlickException
     {
         map = new TiledMap("slick/testdata/map1.tmx");
+        Image [] moveUp = {new Image("spriteUP.png"), new Image("spriteUP.png")};
+        Image [] moveDown = {new Image("spriteDOWN.png"), new Image("spriteDOWN.png")};
+        Image [] moveLeft = {new Image("spriteLEFT.png"), new Image("spriteLEFT.png")};
+        Image [] moveRight = {new Image("spriteRIGHT.png"), new Image("spriteRIGHT.png")};
+        int [] duration = {300, 300};
+        up = new Animation(moveUp, duration, false);
+        down = new Animation(moveDown, duration, false);
+        left = new Animation(moveLeft, duration, false);
+        right = new Animation(moveRight, duration, false); 
+        sprite = right;
     }
  
     @Override
@@ -49,7 +63,8 @@ public class OrangePickingGame extends BasicGame
     }
  
     public void render(GameContainer container, Graphics g) throws SlickException
-    {
+    { 
         map.render(0,0);
+        sprite.draw((int)x, (int)y);
     }
 }
