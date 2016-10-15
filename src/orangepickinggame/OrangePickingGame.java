@@ -15,10 +15,12 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.*;
 /**
- * @author panos
+ * @author Alina
+ * @author Jasmeet
  */
 public class OrangePickingGame extends BasicGame
 {
+    //comment
     private TiledMap map;
     private Animation sprite, up, down, left, right;
     private float x = 34f, y = 34f;
