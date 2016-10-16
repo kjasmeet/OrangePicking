@@ -17,12 +17,14 @@ public class OrangePickingGame extends StateBasedGame {
     public static final int menu = 0;
     public static final int play = 1;
     public static final int instruct = 2;
+    public static final int gameOver = 3;
 
     public OrangePickingGame() {
         super("Pick oranges!");
         this.addState(new Menu(menu));
         this.addState(new Play(play));
         this.addState(new Instructions(instruct));
+        this.addState(new GameOver(gameOver));
     }
 
     @Override

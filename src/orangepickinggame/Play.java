@@ -13,12 +13,13 @@ public class Play extends BasicGameState {
 
     private TiledMap map;
     private Animation sprite, up, down, left, right;
+    double time = 20000;
     int x = 20, y = 20;
     int xHeight = 0;
     int yHeight = 0;
 
     public Play(int playState) {
-      
+
     }
 
     @Override
@@ -45,11 +46,21 @@ public class Play extends BasicGameState {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         map.render(0, 0, yHeight, xHeight, 20, 20);
         sprite.draw(x, y);
+        double calculateTime = time / 1000;
+        if (calculateTime >= 10) {
+            grphcs.setColor(Color.yellow);
+        }else{
+            grphcs.setColor(Color.red);
+        }
+        grphcs.drawString("Time left: " + time / 1000, 450, 20);
     }
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
-        
+        time -= i;
+        if (time <= 0.0) {
+            sbg.enterState(3);
+        }
     }
 
     @Override
