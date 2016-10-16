@@ -5,14 +5,10 @@
  */
 package orangepickinggame;
 
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import org.lwjgl.input.Mouse;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -21,54 +17,45 @@ import org.newdawn.slick.state.StateBasedGame;
  *
  * @author JasmeetKaur
  */
-public class Menu extends BasicGameState {
-    Image image;
-    Image play;
-    Image instruction;
-    public Menu(int menuState) {
+public class Instructions extends BasicGameState {
 
+    Image background;
+    Image back;
+    public Instructions(int instructions) {
     }
 
     @Override
     public int getID() {
-        return 0;
+        return 2;
     }
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-       image = new Image("Images/gameBackground.PNG");
-       play = new Image("Images/play.png");
-       instruction = new Image("Images/instructions.png");
-        
+        background = new Image("Images/patterns.PNG");
+        back = new Image("Images/back.PNG");
     }
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-        g.drawImage(image, 0, 0);
-        g.drawString("Welcome to Orange Picking!", 50, 50);
-        g.setColor(Color.black);
-        play.draw(50, 150);
-        instruction.draw(50, 250);
-        
+        g.drawImage(background, 0, 0);
+        g.drawString("Move your arrows keys to move up, down, left or right.", 50, 50);
+        g.drawString("Use your spacebar key to pick up oranges.", 50, 100);
+        g.drawString("Meet the goal for the level to pass on to the next level.", 50, 150);
+        g.drawString("Hit the back button to go to menu!", 50, 200);
+        g.drawImage(back, 225, 400);
     }
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         int xPos = Mouse.getX();
         int yPos = Mouse.getY();
+       
         
-        if((xPos>50 && xPos<200) && (yPos>408 && yPos < 466)){
+        if((xPos>224 && xPos<367) && (yPos>150 && yPos < 219)){
             if(Mouse.isButtonDown(0)){
-                sbg.enterState(1);
+                sbg.enterState(0);
             }
         }
-        
-        if((xPos>50 && xPos<316) && (yPos>304 && yPos < 367)){
-            if(Mouse.isButtonDown(0)){
-                sbg.enterState(2);
-            }
-        }
-        
-        
     }
+    
 }
