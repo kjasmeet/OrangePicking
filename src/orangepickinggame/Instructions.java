@@ -38,6 +38,7 @@ public class Instructions extends BasicGameState {
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         g.drawImage(background, 0, 0);
+        
         g.drawString("Move your arrows keys to move up, down, left or right.", 50, 50);
         g.drawString("Use your spacebar key to pick up oranges.", 50, 100);
         g.drawString("Meet the goal for the level to pass on to the next level.", 50, 150);

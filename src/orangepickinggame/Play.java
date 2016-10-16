@@ -4,6 +4,7 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
+import static orangepickinggame.OrangePickingGame.gameOver;
 
 /**
  *
@@ -13,7 +14,7 @@ public class Play extends BasicGameState {
 
     private TiledMap map;
     private Animation sprite, up, down, left, right;
-    double time = 20000;
+    double time = 120000;
     int x = 20, y = 20;
     int xHeight = 0;
     int yHeight = 0;
@@ -59,7 +60,7 @@ public class Play extends BasicGameState {
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         time -= i;
         if (time <= 0.0) {
-            sbg.enterState(3);
+            sbg.enterState(gameOver);
         }
     }
 
