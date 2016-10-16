@@ -29,10 +29,10 @@ public class Play extends BasicGameState {
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         map = new TiledMap("slick/testdata/map1.tmx");
-        Image[] moveUp = {new Image("spriteUP.png"), new Image("spriteUP.png")};
-        Image[] moveDown = {new Image("spriteDOWN.png"), new Image("spriteDOWN.png")};
-        Image[] moveLeft = {new Image("spriteLEFT.png"), new Image("spriteLEFT.png")};
-        Image[] moveRight = {new Image("spriteRIGHT.png"), new Image("spriteRIGHT.png")};
+        Image[] moveUp = {new Image("Images/spriteUP.png"), new Image("Images/spriteUP.png")};
+        Image[] moveDown = {new Image("Images/spriteDOWN.png"), new Image("Images/spriteDOWN.png")};
+        Image[] moveLeft = {new Image("Images/spriteLEFT.png"), new Image("Images/spriteLEFT.png")};
+        Image[] moveRight = {new Image("Images/spriteRIGHT.png"), new Image("Images/spriteRIGHT.png")};
         int[] duration = {300, 300};
         up = new Animation(moveUp, duration, false);
         down = new Animation(moveDown, duration, false);
