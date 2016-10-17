@@ -37,7 +37,7 @@ public class OrangePickingGame extends StateBasedGame {
     public static void main(String[] arguments) throws SlickException {
 
         AppGameContainer app = new AppGameContainer(new OrangePickingGame());
-        app.setDisplayMode(630, 620, false);
+        app.setDisplayMode(620, 630, false);
         app.start();
     }
 }

@@ -5,6 +5,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
 import static orangepickinggame.OrangePickingGame.gameOver;
+import org.lwjgl.input.Mouse;
 
 /**
  *
@@ -45,15 +46,22 @@ public class Play extends BasicGameState {
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
+        
         map.render(0, 0, yHeight, xHeight, 20, 20);
+        
         sprite.draw(x, y);
         double calculateTime = time / 1000;
         if (calculateTime >= 10) {
             grphcs.setColor(Color.yellow);
-        }else{
+        } else {
             grphcs.setColor(Color.red);
         }
         grphcs.drawString("Time left: " + time / 1000, 450, 20);
+        int xx = Mouse.getX();
+        int yy = Mouse.getY();
+
+        grphcs.drawString(xx + " " + yy, 50, 50);
+
     }
 
     @Override
@@ -69,37 +77,45 @@ public class Play extends BasicGameState {
 
         switch (key) {
             case Input.KEY_RIGHT:
-                x += 10;
-
-                if (yHeight < 32 && x >= 630) {
-                    x = 10;
-                    yHeight += 4;
+                sprite = right;
+                
+                if (yHeight < 80 && x >= 600) {
+                     x = 10;
+                    yHeight += 20;
+                }else if(x < 600){
+                    x += 20;
                 }
                 break;
             case Input.KEY_LEFT:
+                sprite = left;
                 if (x >= 20) {
-                    x -= 10;
+                    x -= 20;
                 }
                 if (yHeight >= 4 && x <= 10) {
-                    x = 630;
-                    yHeight -= 4;
+                     x = 630;
+                    yHeight -= 20;
                 }
 
                 break;
             case Input.KEY_DOWN:
-                y += 10;
-                if (xHeight < 32 && y > 600) {
+                sprite = down;
+                
+                if (y >= 600 && xHeight < 80 ) {
                     y = 20;
-                    xHeight += 4;
+                    xHeight += 20;
+                }else if(y < 600){
+                    y += 20;
                 }
+                
                 break;
             case Input.KEY_UP:
+                sprite = up;
                 if (y >= 20) {
-                    y -= 10;
+                    y -= 20;
                 }
                 if (xHeight >= 4 && y <= 10) {
                     y = 610;
-                    xHeight -= 4;
+                    xHeight -= 20;
                 }
                 break;
             default:
