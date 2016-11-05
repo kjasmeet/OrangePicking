@@ -57,13 +57,11 @@ public class Play extends BasicGameState {
         
         orange = new Image("Images/oranges.png");
         
-        Random r = new Random();
-        
         for (int i=0;i<numOs;i++){
             int low = 50;
             int high = 600;
-            int xl = r.nextInt(high-low) + low;
-            int yl = r.nextInt(high-low) + low;
+            int xl = (int) (Math.random() * 600);
+            int yl = (int) (Math.random() * 600);
             
             o[i] = new Orange(xl, yl, i);
             isDrawn[i] = true;

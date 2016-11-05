@@ -17,7 +17,7 @@ public class Orange {
     
     public Orange(int xl, int yl,int in){
         x = xl;
-        y = xl;
+        y = yl;
         orangerec = new Rectangle(x,y, 25,25);
         index = in;
     }
