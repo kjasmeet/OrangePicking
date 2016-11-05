@@ -1,5 +1,6 @@
 package orangepickinggame;
 
+import java.util.Random;
 import org.newdawn.slick.geom.*;
 import java.util.Vector;
 import org.newdawn.slick.*;
@@ -24,24 +25,12 @@ public class Play extends BasicGameState {
     Image orange;
     Rectangle player = new Rectangle(x,y,25,25);
     int score = 0;
+    int numOs = 50;
     
     /*orange collection declarations*/
-    boolean orangesDone = false;
-    Rectangle o1 = new Rectangle(42, 275, 25, 25);
-    Rectangle o2 = new Rectangle(141, 288, 25, 25);
-    Rectangle o3 = new Rectangle(156, 105, 25, 25);
-    Rectangle o4 = new Rectangle(171, 25, 25, 25);
-    Rectangle o5 = new Rectangle(301, 241, 25, 25);
-    boolean isDrawn1 = true;
-    boolean isScored1 = true;
-    boolean isDrawn2 = true;
-    boolean isScored2 = true;
-    boolean isDrawn3 = true;
-    boolean isScored3 = true;
-    boolean isDrawn4 = true;
-    boolean isScored4 = true;
-    boolean isDrawn5 = true;
-    boolean isScored5 = true;
+    Orange o[] = new Orange[numOs];
+    boolean isDrawn[] = new boolean[numOs];
+    boolean isScored[] = new boolean[numOs];
 
     public Play(int playState) {
 
@@ -67,6 +56,19 @@ public class Play extends BasicGameState {
         sprite = right;
         
         orange = new Image("Images/oranges.png");
+        
+        Random r = new Random();
+        
+        for (int i=0;i<numOs;i++){
+            int low = 50;
+            int high = 600;
+            int xl = r.nextInt(high-low) + low;
+            int yl = r.nextInt(high-low) + low;
+            
+            o[i] = new Orange(xl, yl, i);
+            isDrawn[i] = true;
+            isScored[i] = true;
+        }
     }
 
     @Override
@@ -86,11 +88,11 @@ public class Play extends BasicGameState {
         int xx = Mouse.getX();
         int yy = Mouse.getY();
         
-        if(isDrawn1 == true){grphcs.drawImage(orange, 42, 275);}
-	if(isDrawn2 == true){grphcs.drawImage(orange, 141, 288);}
-	if(isDrawn3 == true){grphcs.drawImage(orange, 156, 105);}
-	if(isDrawn4 == true){grphcs.drawImage(orange, 171, 25);}
-	if(isDrawn5 == true){grphcs.drawImage(orange, 301, 241);}
+        for(int i=0;i<numOs;i++){
+            if(isDrawn[i] ==true){
+                grphcs.drawImage(orange,o[i].getXVal(),o[i].getYVal());
+            }
+        }
 
         grphcs.drawString(xx + " " + yy, 50, 50);
 
@@ -102,42 +104,15 @@ public class Play extends BasicGameState {
         if (time <= 0.0) {
             sbg.enterState(gameOver);
         }
-        
-        if(player.intersects(o1)){
-            if(isScored1 == true){
-                score += 1;
-		isScored1 = false;
+        for(int j = 0; j<numOs; j++){
+            if(player.intersects(o[j].getRectangle())){
+                if(isScored[j]==true){
+                    score += 1;
+                    isScored[j] = false;
+                }
+                isDrawn[j] = false;
             }
-            isDrawn1 = false;
-	}
-	if(player.intersects(o2)){
-            if(isScored2 == true){
-                score += 1;
-		isScored2 = false;
-            }
-            isDrawn2 = false;
-	}
-        if(player.intersects(o3)){
-            if(isScored3 == true){
-                score += 1;
-		isScored3 = false;
-            }
-            isDrawn3 = false;
-	}
-        if(player.intersects(o4)){
-            if(isScored4 == true){
-                score += 1;
-		isScored4 = false;
-            }
-            isDrawn4 = false;
-	}
-        if(player.intersects(o5)){
-            if(isScored5 == true){
-                score += 1;
-		isScored5 = false;
-            }
-            isDrawn5 = false;
-	}
+        }
     }
 
     @Override
