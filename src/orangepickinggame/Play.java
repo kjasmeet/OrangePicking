@@ -22,6 +22,8 @@ public class Play extends BasicGameState {
     int x = 20, y = 20;
     int xHeight = 0;
     int yHeight = 0;
+    int xBox = 0;
+    int yBox = 0;
     Image orange;
     Rectangle player = new Rectangle(x,y,25,25);
     int score = 0;
@@ -60,8 +62,8 @@ public class Play extends BasicGameState {
         for (int i=0;i<numOs;i++){
             int low = 50;
             int high = 600;
-            int xl = (int) (Math.random() * 600);
-            int yl = (int) (Math.random() * 600);
+            int xl = (int) (Math.random() * (600*2));
+            int yl = (int) (Math.random() * (600*2));
             
             o[i] = new Orange(xl, yl, i);
             isDrawn[i] = true;
@@ -87,8 +89,8 @@ public class Play extends BasicGameState {
         int yy = Mouse.getY();
         
         for(int i=0;i<numOs;i++){
-            if(isDrawn[i] ==true){
-                grphcs.drawImage(orange,o[i].getXVal(),o[i].getYVal());
+            if((isDrawn[i] ==true)&&((o[i].getXVal()/600)==xBox)&&((o[i].getYVal()/600)==yBox)){
+                grphcs.drawImage(orange,(o[i].getXVal())%600,(o[i].getYVal())%600);
             }
         }
 
@@ -104,11 +106,13 @@ public class Play extends BasicGameState {
         }
         for(int j = 0; j<numOs; j++){
             if(player.intersects(o[j].getRectangle())){
-                if(isScored[j]==true){
-                    score += 1;
-                    isScored[j] = false;
+                if(((o[i].getXVal()/600)==xBox)&&((o[i].getYVal()/600)==yBox)){
+                    if(isScored[j]==true){
+                        score += 1;
+                        isScored[j] = false;
+                    }
+                    isDrawn[j] = false;
                 }
-                isDrawn[j] = false;
             }
         }
     }
@@ -123,6 +127,7 @@ public class Play extends BasicGameState {
                 if (yHeight < 80 && x >= 600) {
                      x = 10;
                      yHeight += 20;
+                     yBox++;
                 }else if(x < 600){
                     x += 20;
                     player.setX(x);
@@ -137,6 +142,7 @@ public class Play extends BasicGameState {
                 if (yHeight >= 4 && x <= 10) {
                      x = 630;
                     yHeight -= 20;
+                    yBox--;
                 }
 
                 break;
@@ -146,6 +152,7 @@ public class Play extends BasicGameState {
                 if (y >= 600 && xHeight < 80 ) {
                     y = 20;
                     xHeight += 20;
+                    xBox++;
                 }else if(y < 600){
                     y += 20;
                     player.setY(y);
@@ -161,6 +168,7 @@ public class Play extends BasicGameState {
                 if (xHeight >= 4 && y <= 10) {
                     y = 610;
                     xHeight -= 20;
+                    xBox--;
                 }
                 break;
             default:
