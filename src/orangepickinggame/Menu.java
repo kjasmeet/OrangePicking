@@ -47,7 +47,7 @@ public class Menu extends BasicGameState {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         g.drawImage(image, 0, 0);
         g.drawString("Welcome to Orange Picking!", 50, 50);
-        g.setColor(Color.black);
+        g.setColor(Color.white);
         playImage.draw(50, 150);
         instruction.draw(50, 250);
 
