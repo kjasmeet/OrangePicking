@@ -27,7 +27,7 @@ public class Play extends BasicGameState {
     Image orange;
     Rectangle player = new Rectangle(x,y,25,25);
     int score = 0;
-    int numOs = 50;
+    int numOs = 150;
     
     /*orange collection declarations*/
     Orange o[] = new Orange[numOs];
@@ -62,8 +62,8 @@ public class Play extends BasicGameState {
         for (int i=0;i<numOs;i++){
             int low = 50;
             int high = 600;
-            int xl = (int) (Math.random() * (600*2));
-            int yl = (int) (Math.random() * (600*2));
+            int xl = (int) (Math.random() * (600*5));
+            int yl = (int) (Math.random() * (600*5));
             
             o[i] = new Orange(xl, yl, i);
             isDrawn[i] = true;
@@ -106,7 +106,7 @@ public class Play extends BasicGameState {
         }
         for(int j = 0; j<numOs; j++){
             if(player.intersects(o[j].getRectangle())){
-                if(((o[i].getXVal()/600)==xBox)&&((o[i].getYVal()/600)==yBox)){
+                if(((o[j].getXVal()/600)==xBox)&&((o[j].getYVal()/600)==yBox)){
                     if(isScored[j]==true){
                         score += 1;
                         isScored[j] = false;
