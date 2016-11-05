@@ -1,27 +1,28 @@
 package orangepickinggame;
 
-import static orangepickinggame.OrangePickingGame.play;
+import static orangepickinggame.OrangePickingGame.playLevelThree;
 import static orangepickinggame.OrangePickingGame.playLevelTwo;
-import org.newdawn.slick.*;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
  *
  * @author JasmeetKaur
  */
-public class Play extends InitializeCode {
+public class PlayLevelTwo extends InitializeCode{
     
-    int orangeGoal = 10; 
+    int orangeGoal = 15;
     
-    public Play(int playState) {
+    public PlayLevelTwo(int playState) {
         super();
-        super.setTime(120000);
+        super.setTime(60000);
     }
 
     @Override
     public int getID() {
-        return play;
-        
+        return playLevelTwo;
     }
 
     @Override
@@ -37,9 +38,8 @@ public class Play extends InitializeCode {
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         super.update(gc, sbg, i);
-        
         if(orangeGoal <= super.score){
-            sbg.enterState(playLevelTwo);
+            sbg.enterState(playLevelThree);
         }
     }
 
@@ -47,5 +47,4 @@ public class Play extends InitializeCode {
     public void keyPressed(int key, char c) {
         super.keyPressed(key, c);
     }
-
 }

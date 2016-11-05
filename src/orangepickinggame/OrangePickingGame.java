@@ -18,6 +18,8 @@ public class OrangePickingGame extends StateBasedGame {
     public static final int play = 1;
     public static final int instruct = 2;
     public static final int gameOver = 3;
+    public static final int playLevelTwo = 4;
+    public static final int playLevelThree = 5;
 
     public OrangePickingGame() {
         super("Pick oranges!");
@@ -25,6 +27,8 @@ public class OrangePickingGame extends StateBasedGame {
         this.addState(new Play(play));
         this.addState(new Instructions(instruct));
         this.addState(new GameOver(gameOver));
+        this.addState(new PlayLevelTwo(playLevelTwo));
+        this.addState(new PlayLevelTwo(playLevelThree));
     }
 
     @Override
