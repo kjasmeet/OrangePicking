@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static orangepickinggame.OrangePickingGame.gameOver;
@@ -112,11 +113,13 @@ public class InitializeCode extends BasicGameState{
         
         sprite.draw(x, y);
         double calculateTime = time / 1000;
+        DecimalFormat df = new DecimalFormat("#");
+        
         if (calculateTime >= 10) {
-            font.drawString(420, 20, "Time left: " + time / 1000, Color.yellow);
+            font.drawString(420, 20, "Time left: " + df.format(calculateTime), Color.yellow);
             grphcs.setColor(Color.yellow);
         } else {
-            font.drawString(420, 20, "Time left: " + time / 1000, Color.red);
+            font.drawString(420, 20, "Time left: " + df.format(calculateTime), Color.red);
             grphcs.setColor(Color.red);
         }
         font.drawString(420, 50, "Current score: " + score, Color.yellow);
