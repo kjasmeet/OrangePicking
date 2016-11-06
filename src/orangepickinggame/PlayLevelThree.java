@@ -1,6 +1,7 @@
 package orangepickinggame;
 
 import static orangepickinggame.OrangePickingGame.playLevelThree;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -15,7 +16,7 @@ public class PlayLevelThree extends InitializeCode {
     
     public PlayLevelThree(int playState) {
         super();
-        super.setTime(30000);
+        super.setTime(10000);
     }
 
     @Override
@@ -32,6 +33,8 @@ public class PlayLevelThree extends InitializeCode {
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         super.render(gc, sbg, grphcs);
+        font.drawString(50, 20, "Level 3 - Watch where you step!", Color.yellow);
+        grphcs.setColor(Color.yellow);
     }
 
     @Override
