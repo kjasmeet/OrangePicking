@@ -12,7 +12,7 @@ import org.newdawn.slick.state.StateBasedGame;
  * @author JasmeetKaur
  */
 public class PlayLevelThree extends InitializeCode {
-    int orangeGoal = 10; 
+    int orangeGoal = 20; 
     
     public PlayLevelThree(int playState) {
         super();

@@ -5,6 +5,12 @@
  */
 package orangepickinggame;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static orangepickinggame.OrangePickingGame.gameOver;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Animation;
@@ -14,10 +20,12 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
+import org.newdawn.slick.util.ResourceLoader;
 
 /**
  *
@@ -37,6 +45,7 @@ public class InitializeCode extends BasicGameState{
     Rectangle player = new Rectangle(x,y,25,25);
     int score = 0;
     int numOs = 150;
+    TrueTypeFont font;
     
     /*orange collection declarations*/
     Orange o[] = new Orange[numOs];
@@ -87,6 +96,14 @@ public class InitializeCode extends BasicGameState{
             isDrawn[i] = true;
             isScored[i] = true;
         }
+        try {
+            InputStream inputStream = ResourceLoader.getResourceAsStream("Ubuntu-Title.ttf");
+            Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+            awtFont = awtFont.deriveFont(25f); // set font size
+            font = new TrueTypeFont(awtFont, false);
+        } catch (FontFormatException | IOException ex) {
+            Logger.getLogger(Instructions.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -96,12 +113,13 @@ public class InitializeCode extends BasicGameState{
         sprite.draw(x, y);
         double calculateTime = time / 1000;
         if (calculateTime >= 10) {
+            font.drawString(420, 20, "Time left: " + time / 1000, Color.yellow);
             grphcs.setColor(Color.yellow);
         } else {
+            font.drawString(420, 20, "Time left: " + time / 1000, Color.red);
             grphcs.setColor(Color.red);
         }
-        grphcs.drawString("Time left: " + time / 1000, 450, 20);
-        grphcs.drawString("Current score: " + score, 450, 40);
+        font.drawString(420, 50, "Current score: " + score, Color.yellow);
         int xx = Mouse.getX();
         int yy = Mouse.getY();
         

@@ -5,13 +5,22 @@
  */
 package orangepickinggame;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.lwjgl.input.Mouse;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.util.ResourceLoader;
 
 /**
  *
@@ -21,6 +30,7 @@ public class Instructions extends BasicGameState {
 
     Image background;
     Image back;
+    TrueTypeFont font;
     public Instructions(int instructions) {
     }
 
@@ -32,18 +42,31 @@ public class Instructions extends BasicGameState {
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         background = new Image("Images/patterns.PNG");
-        back = new Image("Images/back.PNG");
+        back = new Image("Images/button_back.PNG");
+        
+        try {
+            InputStream inputStream = ResourceLoader.getResourceAsStream("Ubuntu-Title.ttf");
+            Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+            awtFont = awtFont.deriveFont(25f); // set font size
+            font = new TrueTypeFont(awtFont, false);
+        } catch (FontFormatException | IOException ex) {
+            Logger.getLogger(Instructions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         g.drawImage(background, 0, 0);
-        
-        g.drawString("Move your arrows keys to move up, down, left or right.", 50, 50);
-        g.drawString("Use your spacebar key to pick up oranges.", 50, 100);
-        g.drawString("Meet the goal for the level to pass on to the next level.", 50, 150);
-        g.drawString("Hit the back button to go to menu!", 50, 200);
+        font.drawString(25, 100, "Press your arrows keys to move up, down, left or right.", Color.black);
+        font.drawString(25, 150, "Collect oranges by walking through them", Color.black);
+        font.drawString(25, 200, "Meet the goal for the level to pass on to the next level.", Color.black);
+        font.drawString(25, 250, "Hit the back button to go to menu!", Color.black);
         g.drawImage(back, 225, 400);
+        g.setColor(Color.black);
+        int xx = Mouse.getX();
+        int yy = Mouse.getY();
+        g.drawString(xx + " " + yy, 300, 50);
     }
 
     @Override
@@ -52,7 +75,7 @@ public class Instructions extends BasicGameState {
         int yPos = Mouse.getY();
        
         
-        if((xPos>224 && xPos<367) && (yPos>150 && yPos < 219)){
+        if((xPos>225 && xPos<322) && (yPos>188 && yPos < 229)){
             if(Mouse.isButtonDown(0)){
                 sbg.enterState(0);
             }

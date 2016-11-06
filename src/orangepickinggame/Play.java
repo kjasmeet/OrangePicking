@@ -15,15 +15,18 @@ public class Play extends InitializeCode {
     
     public Play(int playState) {
         super();
-        super.setTime(120000);
     }
 
     @Override
     public int getID() {
         return play;
-        
     }
-
+    
+    @Override
+    public void enter(GameContainer gc, StateBasedGame sbg){
+        super.setTime(1000);
+    }
+    
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         super.init(gc, sbg);
@@ -47,5 +50,6 @@ public class Play extends InitializeCode {
     public void keyPressed(int key, char c) {
         super.keyPressed(key, c);
     }
+    
 
 }

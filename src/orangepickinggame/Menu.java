@@ -5,6 +5,12 @@
  */
 package orangepickinggame;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static orangepickinggame.OrangePickingGame.instruct;
 import static orangepickinggame.OrangePickingGame.play;
 import org.lwjgl.input.Mouse;
@@ -13,8 +19,10 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.util.ResourceLoader;
 
 /**
  *
@@ -24,7 +32,8 @@ public class Menu extends BasicGameState {
 
     Image image;
     Image playImage;
-    Image instruction;
+    Image instruction_image;
+    TrueTypeFont font;
 
     public Menu(int menuState) {
 
@@ -38,19 +47,26 @@ public class Menu extends BasicGameState {
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         image = new Image("Images/gameBackground.PNG");
-        playImage = new Image("Images/play.png");
-        instruction = new Image("Images/instructions.png");
+        playImage = new Image("Images/button_play.png");
+        instruction_image = new Image("Images/button_instructions.png");
+        try {
+            InputStream inputStream = ResourceLoader.getResourceAsStream("Ubuntu-Title.ttf");
+            Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+            awtFont = awtFont.deriveFont(40f); // set font size
+            font = new TrueTypeFont(awtFont, false);
+        } catch (FontFormatException | IOException ex) {
+            Logger.getLogger(Instructions.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         g.drawImage(image, 0, 0);
-        g.drawString("Welcome to Orange Picking!", 50, 50);
-        g.setColor(Color.white);
+        font.drawString(50, 50, "Welcome to Orange Picking!", Color.yellow);
         playImage.draw(50, 150);
-        instruction.draw(50, 250);
-
+        instruction_image.draw(50, 250);
+        
     }
 
     @Override
@@ -72,7 +88,7 @@ public class Menu extends BasicGameState {
         int stateToBeReturned = 0;
         
         /*user clicked play button*/
-        if ((xPos > 50 && xPos < 200) && (yPos > 408 && yPos < 466)) {
+        if ((xPos > 50 && xPos < 150) && (yPos > 439 && yPos < 479)) {
             if (Mouse.isButtonDown(0)) {
                 stateToBeReturned = play;
 
@@ -80,7 +96,7 @@ public class Menu extends BasicGameState {
         }
 
         /*user clicked instruction button*/
-        if ((xPos > 50 && xPos < 316) && (yPos > 304 && yPos < 367)) {
+        if ((xPos > 50 && xPos < 372) && (yPos > 339 && yPos < 378)) {
             if (Mouse.isButtonDown(0)) {
                 stateToBeReturned = instruct;
 

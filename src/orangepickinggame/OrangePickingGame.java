@@ -34,7 +34,7 @@ public class OrangePickingGame extends StateBasedGame {
     @Override
     public void initStatesList(GameContainer gc) throws SlickException {
         this.getState(menu).init(gc, this);
-        this.getState(play).init(gc, this);
+        this.getState(play).init(gc, this); 
         this.enterState(menu);
     }
 
