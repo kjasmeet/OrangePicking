@@ -24,7 +24,7 @@ public class Play extends InitializeCode {
     
     @Override
     public void enter(GameContainer gc, StateBasedGame sbg){
-        super.setTime(1000);
+        super.setTime(80000);
     }
     
     @Override
