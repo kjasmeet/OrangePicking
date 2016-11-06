@@ -11,7 +11,7 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class Play extends InitializeCode {
     
-    int orangeGoal = 10; 
+    int orangeGoal = 5; 
     
     public Play(int playState) {
         super();
@@ -24,7 +24,8 @@ public class Play extends InitializeCode {
     
     @Override
     public void enter(GameContainer gc, StateBasedGame sbg){
-        super.setTime(80000);
+        super.setTime(90000);
+        super.score = 0;
     }
     
     @Override

@@ -159,7 +159,7 @@ public class InitializeCode extends BasicGameState{
             case Input.KEY_RIGHT:
                 sprite = right;
                 
-                if (yHeight < 80 && x >= 600) {
+                if (yHeight < 80 && x >= 590) {
                      x = 10;
                      yHeight += 20;
                      yBox++;
@@ -175,7 +175,7 @@ public class InitializeCode extends BasicGameState{
                     player.setX(x);
                 }
                 if (yHeight >= 4 && x <= 10) {
-                     x = 630;
+                    x = 590;
                     yHeight -= 20;
                     yBox--;
                 }
