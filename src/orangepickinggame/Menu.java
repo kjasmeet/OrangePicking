@@ -20,6 +20,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.BasicGameState;
@@ -36,6 +37,7 @@ public class Menu extends BasicGameState {
     Image playImage;
     Image instruction_image;
     TrueTypeFont font;
+    Music music;
 
     public Menu(int menuState) {
 
@@ -51,6 +53,8 @@ public class Menu extends BasicGameState {
         image = new Image("Images/gameBackground.PNG");
         playImage = new Image("Images/button_play.png");
         instruction_image = new Image("Images/button_instructions.png");
+        music = new Music("res/menu.wav");
+        music.loop();
         try {
             InputStream inputStream = ResourceLoader.getResourceAsStream("Ubuntu-Title.ttf");
             Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
@@ -65,6 +69,7 @@ public class Menu extends BasicGameState {
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         g.drawImage(image, 0, 0);
+        
         font.drawString(50, 50, "Welcome to Orange Picking!", Color.yellow);
         playImage.draw(50, 150);
         instruction_image.draw(50, 250);

@@ -20,6 +20,7 @@ import static orangepickinggame.OrangePickingGame.splashScreen;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.BasicGameState;
@@ -36,6 +37,7 @@ public class SplashScreen extends BasicGameState {
 
     TrueTypeFont font;
     double time = 0;
+    Image slashBackground;
 
     public SplashScreen(int id) {
 
@@ -53,11 +55,13 @@ public class SplashScreen extends BasicGameState {
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+        slashBackground = new Image("Images/slashBackground.png");
         try {
             InputStream inputStream = ResourceLoader.getResourceAsStream("Ubuntu-Title.ttf");
             Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
             awtFont = awtFont.deriveFont(40f); // set font size
             font = new TrueTypeFont(awtFont, false);
+            
         } catch (FontFormatException | IOException ex) {
             Logger.getLogger(Instructions.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -65,20 +69,24 @@ public class SplashScreen extends BasicGameState {
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
+        slashBackground.draw(0, 0);
         double calculateTime = time / 1000;
         DecimalFormat df = new DecimalFormat("#");
-
-        font.drawString(50, 100, "Goal: ", Color.white);
-        font.drawString(50, 200, "The level starts in", Color.white);
-        font.drawString(200, 300, df.format(calculateTime), Color.yellow);
+        Color purple = Color.decode("#8A2BE2");
+        font.drawString(50, 100, "Goal: ", purple);
+        
+        font.drawString(200, 300, df.format(calculateTime), Color.red);
         if (state == 1) {
-            font.drawString(50, 50, "Congratulations!", Color.white);
-            font.drawString(50, 150, "Collect 7 oranges in 45 seconds!", Color.white);
+            font.drawString(50, 50, "Congratulations!", purple);
+            font.drawString(50, 150, "Collect 7 oranges in 45 seconds!", purple);
+            font.drawString(50, 200, "Level 2 starts in", purple);
         } else if (state == 2) {
-            font.drawString(50, 50, "Congratulations!", Color.white);
-            font.drawString(50, 150, "Collect 10 oranges in 30 seconds!", Color.white);
+            font.drawString(50, 50, "Congratulations!", purple);
+            font.drawString(50, 150, "Collect 10 oranges in 30 seconds!", purple);
+            font.drawString(50, 200, "Level 3 starts in", purple);
         } else if (state == 0) {
-            font.drawString(50, 150, "Collect 5 oranges in 60 seconds!", Color.white);
+            font.drawString(50, 150, "Collect 5 oranges in 60 seconds!", purple);
+            font.drawString(50, 200, "Level 1 starts in", purple);
         }
     }
 
