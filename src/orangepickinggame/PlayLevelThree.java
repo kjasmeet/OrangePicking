@@ -16,13 +16,18 @@ public class PlayLevelThree extends InitializeCode {
     
     public PlayLevelThree(int playState) {
         super();
-        super.setTime(10000);
     }
 
     @Override
     public int getID() {
         return playLevelThree;
         
+    }
+    
+    @Override
+    public void enter(GameContainer gc, StateBasedGame sbg){
+        super.setTime(30000);
+        super.score = 0;
     }
 
     @Override
@@ -34,7 +39,7 @@ public class PlayLevelThree extends InitializeCode {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         super.render(gc, sbg, grphcs);
         font.drawString(50, 20, "Level 3 - Watch where you step!", Color.yellow);
-        grphcs.setColor(Color.yellow);
+        
     }
 
     @Override

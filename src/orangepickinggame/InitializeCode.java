@@ -97,14 +97,9 @@ public class InitializeCode extends BasicGameState{
             isDrawn[i] = true;
             isScored[i] = true;
         }
-        try {
-            InputStream inputStream = ResourceLoader.getResourceAsStream("Ubuntu-Title.ttf");
-            Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-            awtFont = awtFont.deriveFont(25f); // set font size
-            font = new TrueTypeFont(awtFont, false);
-        } catch (FontFormatException | IOException ex) {
-            Logger.getLogger(Instructions.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        changeFont();
+        
     }
 
     @Override
@@ -211,6 +206,17 @@ public class InitializeCode extends BasicGameState{
                 break;
             default:
                 break;
+        }
+    }
+    
+    public void changeFont(){
+        try {
+            InputStream inputStream = ResourceLoader.getResourceAsStream("Ubuntu-Title.ttf");
+            Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+            awtFont = awtFont.deriveFont(25f); // set font size
+            font = new TrueTypeFont(awtFont, false);
+        } catch (FontFormatException | IOException ex) {
+            Logger.getLogger(Instructions.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

@@ -1,15 +1,12 @@
 package orangepickinggame;
 
-import java.awt.FontFormatException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import static orangepickinggame.OrangePickingGame.play;
-import static orangepickinggame.OrangePickingGame.playLevelTwo;
+import static orangepickinggame.OrangePickingGame.state;
+import static orangepickinggame.OrangePickingGame.splashScreen;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.util.ResourceLoader;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 /**
  *
@@ -44,15 +41,16 @@ public class Play extends InitializeCode {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         super.render(gc, sbg, grphcs);
         font.drawString(50, 20, "Level 1 - Pick oranges!", Color.yellow);
-        grphcs.setColor(Color.yellow);
+        
     }
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         super.update(gc, sbg, i);
         
-        if(super.getTime() <= 0){
-            sbg.enterState(playLevelTwo);
+        if(orangeGoal <= super.score){
+            state = 1;
+            sbg.enterState(splashScreen, new FadeOutTransition(Color.decode("#2fc38b")), new FadeInTransition(Color.black));
         }
     }
 

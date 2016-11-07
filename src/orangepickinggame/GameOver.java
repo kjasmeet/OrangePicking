@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static orangepickinggame.OrangePickingGame.gameOver;
 import static orangepickinggame.OrangePickingGame.menu;
 import static orangepickinggame.OrangePickingGame.play;
 import org.lwjgl.input.Mouse;
@@ -41,7 +42,7 @@ public class GameOver extends BasicGameState {
 
     @Override
     public int getID() {
-        return 3;
+        return gameOver;
     }
 
     @Override

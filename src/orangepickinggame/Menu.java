@@ -12,7 +12,9 @@ import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static orangepickinggame.OrangePickingGame.instruct;
-import static orangepickinggame.OrangePickingGame.play;
+import static orangepickinggame.OrangePickingGame.menu;
+import static orangepickinggame.OrangePickingGame.state;
+import static orangepickinggame.OrangePickingGame.splashScreen;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -41,7 +43,7 @@ public class Menu extends BasicGameState {
 
     @Override
     public int getID() {
-        return 0;
+        return menu;
     }
 
     @Override
@@ -90,7 +92,8 @@ public class Menu extends BasicGameState {
         /*user clicked play button*/
         if ((xPos > 50 && xPos < 150) && (yPos > 439 && yPos < 479)) {
             if (Mouse.isButtonDown(0)) {
-                stateToBeReturned = play;
+                state = 0;
+                stateToBeReturned = splashScreen;
 
             }
         }
