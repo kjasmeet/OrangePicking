@@ -25,17 +25,19 @@ public class OrangePickingGame extends StateBasedGame {
 
     public OrangePickingGame() {
         super("Pick oranges!");
-        this.addState(new Menu(menu));
-        this.addState(new Play(play));
-        this.addState(new Instructions(instruct));
-        this.addState(new GameOver(gameOver));
-        this.addState(new PlayLevelTwo(playLevelTwo));
-        this.addState(new PlayLevelThree(playLevelThree));
-        this.addState(new SplashScreen(splashScreen));
+        /* adds all states for game*/
+        this.addState(new Menu(menu)); /* menu screen (can choose instructions or gameplay*/
+        this.addState(new Play(play)); /* level 1*/
+        this.addState(new Instructions(instruct)); /* instructions for game */
+        this.addState(new GameOver(gameOver)); /* game over screen*/
+        this.addState(new PlayLevelTwo(playLevelTwo)); /* level 2 */
+        this.addState(new PlayLevelThree(playLevelThree)); /* level 3 */
+        this.addState(new SplashScreen(splashScreen)); /* transitional splash screen*/
     }
 
     @Override
     public void initStatesList(GameContainer gc) throws SlickException {
+        /* initializes states*/
         this.getState(menu).init(gc, this);
         this.getState(play).init(gc, this); 
         this.enterState(menu);
@@ -43,6 +45,7 @@ public class OrangePickingGame extends StateBasedGame {
 
     public static void main(String[] arguments) throws SlickException {
 
+        /* loads game*/
         AppGameContainer app = new AppGameContainer(new OrangePickingGame());
         app.setDisplayMode(620, 630, false);
         app.start();

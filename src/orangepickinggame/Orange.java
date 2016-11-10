@@ -15,6 +15,12 @@ public class Orange {
     private Rectangle orangerec;
     int x, y, index;
     
+    /* defines an orange object
+       Rectangle orangerec is used for collision detection with sprite
+       (Defines Rectangle within current coordinate square, hence the mod operator)
+       index - index with the larger array defined in InitializeCode
+       x and y - coordinates of location on map
+    */
     public Orange(int xl, int yl,int in){
         x = xl;
         y = yl;
@@ -22,18 +28,22 @@ public class Orange {
         index = in;
     }
     
+    /* returns Rectangle for collision detection*/
     public Rectangle getRectangle(){
         return orangerec;
     }
     
+    /* returns x coordinate*/
     int getXVal(){
         return x;
     }
     
+    /* returns y coordinate*/
     int getYVal(){
         return y;
     }
     
+    /* returns index*/
     int getIndex(){
         return index;
     }

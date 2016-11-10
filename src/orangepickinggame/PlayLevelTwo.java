@@ -15,6 +15,10 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
  *
  * @author JasmeetKaur
  */
+/* Level 2 - will eventually contain version of level in which enemies can kill you. Will include 3 lives
+   Increased difficulty in orange collection goal and time limit
+*/
+
 public class PlayLevelTwo extends InitializeCode {
 
     int orangeGoal = 7;

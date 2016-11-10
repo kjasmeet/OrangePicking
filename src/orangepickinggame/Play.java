@@ -12,6 +12,10 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
  *
  * @author JasmeetKaur
  */
+/* Level 1 - "bare bones" level, will include only basic functionality (increased in later levels)
+   Easiest difficulty
+*/
+
 public class Play extends InitializeCode {
     
     int orangeGoal = 5; 

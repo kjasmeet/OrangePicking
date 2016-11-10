@@ -34,33 +34,45 @@ import org.newdawn.slick.util.ResourceLoader;
  */
 public class InitializeCode extends BasicGameState{
     
+    /* tmx map that will serve as background for all levels*/
     private TiledMap map;
+    /* animated sprite - images for each of the 4 directions so it looks like it is turning*/
     private Animation sprite, up, down, left, right;
+    /*start coordinates for the sprite*/
     int x = 20, y = 20;
+    /* time limit for level*/
     private double time;
     int xHeight = 0;
     int yHeight = 0;
+    /*current coordinate squares of the map (there are 5 in each direction)*/
     int xBox = 0;
     int yBox = 0;
+    /* orange image to be placed for collection*/
     Image orange;
+    /*defines a rectangle for sprite to be used in collision detection*/
     Rectangle player = new Rectangle(x,y,25,25);
+    /*score of the current level*/
     int score = 0;
+    /* number of oranges to be placed for collection*/
     int numOs = 150;
+    /* font for messages to be displayed*/
     TrueTypeFont font;
     
     /*orange collection declarations*/
-    Orange o[] = new Orange[numOs];
-    boolean isDrawn[] = new boolean[numOs];
-    boolean isScored[] = new boolean[numOs];
+    Orange o[] = new Orange[numOs]; /* array of orange objects for whole map*/
+    boolean isDrawn[] = new boolean[numOs]; /* array of booleans to mark if orange is displayed (will be false if picked up already*/
+    boolean isScored[] = new boolean[numOs]; /* array of boolean to mark if score has been tallied for this orange*/
     
     public InitializeCode(){
         
     }
     
+    /*gets time limit*/
     public double getTime(){
         return time;
     }
     
+    /* sets time limit*/
     public void setTime(double time){
         this.time = time; 
     }
@@ -73,7 +85,10 @@ public class InitializeCode extends BasicGameState{
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         
+        /*loads map*/
         map = new TiledMap("slick/testdata/map1.tmx");
+        
+        /*declares images for each direction for the sprite and adds as animations */
         Image[] moveUp = {new Image("Images/spriteUP.png"), new Image("Images/spriteUP.png")};
         Image[] moveDown = {new Image("Images/spriteDOWN.png"), new Image("Images/spriteDOWN.png")};
         Image[] moveLeft = {new Image("Images/spriteLEFT.png"), new Image("Images/spriteLEFT.png")};
@@ -83,13 +98,14 @@ public class InitializeCode extends BasicGameState{
         down = new Animation(moveDown, duration, false);
         left = new Animation(moveLeft, duration, false);
         right = new Animation(moveRight, duration, false);
+        /* declares initial direction of the sprite as right*/
         sprite = right;
         
+        /*loads orange image from .png file*/
         orange = new Image("Images/oranges.png");
         
+        /*loops through array to create numOs number of oranges and randomly place on map*/
         for (int i=0;i<numOs;i++){
-            int low = 50;
-            int high = 600;
             int xl = (int) (Math.random() * (600*5));
             int yl = (int) (Math.random() * (600*5));
             
@@ -104,12 +120,15 @@ public class InitializeCode extends BasicGameState{
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
+        /* draws map*/
         map.render(0, 0, yHeight, xHeight, 20, 20);
         
+        /* draw sprite at current coordinates*/
         sprite.draw(x, y);
+        
+        /*calculates time limit, displays to user*/
         double calculateTime = time / 1000;
         DecimalFormat df = new DecimalFormat("#");
-        
         if (calculateTime >= 10) {
             font.drawString(420, 20, "Time left: " + df.format(calculateTime), Color.yellow);
             grphcs.setColor(Color.yellow);
@@ -117,10 +136,13 @@ public class InitializeCode extends BasicGameState{
             font.drawString(420, 20, "Time left: " + df.format(calculateTime), Color.red);
             grphcs.setColor(Color.red);
         }
-        font.drawString(420, 50, "Current score: " + score, Color.yellow);
-        int xx = Mouse.getX();
-        int yy = Mouse.getY();
         
+        /* draws current score*/
+        font.drawString(420, 50, "Current score: " + score, Color.yellow);
+        //int xx = Mouse.getX();
+        //int yy = Mouse.getY();
+        
+        /* only draws oranges if they are members of the current coordinate square of the map*/
         for(int i=0;i<numOs;i++){
             if((isDrawn[i] ==true)&&((o[i].getXVal()/600)==xBox)&&((o[i].getYVal()/600)==yBox)){
                 grphcs.drawImage(orange,(o[i].getXVal())%600,(o[i].getYVal())%600);
@@ -132,12 +154,13 @@ public class InitializeCode extends BasicGameState{
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
+        /* updates time. if time is up, moves to gameOver state*/
         time -= i;
-        
         if (time <= 0.0) {
             sbg.enterState(gameOver);
         }
         
+        /* updates orange objects to indicate picked up if a collision with the sprite is detected*/
         for(int j = 0; j<numOs; j++){
             if(player.intersects(o[j].getRectangle())){
                 if(((o[j].getXVal()/600)==xBox)&&((o[j].getYVal()/600)==yBox)){
@@ -150,6 +173,10 @@ public class InitializeCode extends BasicGameState{
             }
         }
     }
+    
+    /* updates position and direction of sprite if a key press is detected. 
+       Also updates the current coordinate square of the map if applicable.
+    */
     @Override
     public void keyPressed(int key, char c) {
 
@@ -209,6 +236,7 @@ public class InitializeCode extends BasicGameState{
         }
     }
     
+    /* font for displayed messages*/
     public void changeFont(){
         try {
             InputStream inputStream = ResourceLoader.getResourceAsStream("Ubuntu-Title.ttf");

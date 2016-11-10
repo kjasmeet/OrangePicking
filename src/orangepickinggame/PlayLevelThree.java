@@ -11,6 +11,11 @@ import org.newdawn.slick.state.StateBasedGame;
  *
  * @author JasmeetKaur
  */
+
+/* Level 3 - will eventually contain a version of initial level in which the player cannot retrace steps
+   Increased difficulty in orange collection goal and time limit
+*/
+
 public class PlayLevelThree extends InitializeCode {
     int orangeGoal = 10; 
     
