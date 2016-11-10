@@ -17,8 +17,10 @@ import org.newdawn.slick.state.StateBasedGame;
 */
 
 public class PlayLevelThree extends InitializeCode {
+/* methods are defined, for the most part, in InitializeCode. This extends.*/
     int orangeGoal = 10; 
     
+    /* constructor for level*/
     public PlayLevelThree(int playState) {
         super();
     }
@@ -29,17 +31,20 @@ public class PlayLevelThree extends InitializeCode {
         
     }
     
+    /* enter level, sets time limit*/
     @Override
     public void enter(GameContainer gc, StateBasedGame sbg){
         super.setTime(30000);
         super.score = 0;
     }
 
+    /* initialize level*/
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         super.init(gc, sbg);
     }
 
+    /* render graphics*/
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         super.render(gc, sbg, grphcs);
@@ -47,6 +52,7 @@ public class PlayLevelThree extends InitializeCode {
         
     }
 
+    /* update graphics*/
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         super.update(gc, sbg, i);
@@ -54,6 +60,7 @@ public class PlayLevelThree extends InitializeCode {
         
     }
 
+    /* change location of sprite based on key presses*/
     @Override
     public void keyPressed(int key, char c) {
         super.keyPressed(key, c);

@@ -82,6 +82,7 @@ public class InitializeCode extends BasicGameState{
         return 0;
     }
 
+    /* initializes level*/
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         
@@ -118,6 +119,7 @@ public class InitializeCode extends BasicGameState{
         
     }
 
+    /* renders graphics for the level*/
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         /* draws map*/
@@ -152,6 +154,7 @@ public class InitializeCode extends BasicGameState{
         //grphcs.drawString(xx + " " + yy, 50, 50);
     }
 
+    /* updates game as changes are made */
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         /* updates time. if time is up, moves to gameOver state*/

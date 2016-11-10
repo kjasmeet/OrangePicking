@@ -17,9 +17,11 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 */
 
 public class Play extends InitializeCode {
+/* methods are defined, for the most part, in InitializeCode. This extends.*/
     
     int orangeGoal = 5; 
     
+    /* constructor for level*/
     public Play(int playState) {
         super();
     }
@@ -29,18 +31,21 @@ public class Play extends InitializeCode {
         return play;
     }
     
+    /* enters level. sets time limit for this specific instance*/
     @Override
     public void enter(GameContainer gc, StateBasedGame sbg){
         super.setTime(60000);
         super.score = 0;
     }
     
+    /* initializes level*/
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         super.init(gc, sbg);
 
     }
 
+    /* renders graphics for level*/
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         super.render(gc, sbg, grphcs);
@@ -48,6 +53,7 @@ public class Play extends InitializeCode {
         
     }
 
+    /* updates graphics based on changes*/
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         super.update(gc, sbg, i);
@@ -58,6 +64,7 @@ public class Play extends InitializeCode {
         }
     }
 
+    /* updates location of sprite based on key presses*/
     @Override
     public void keyPressed(int key, char c) {
         super.keyPressed(key, c);
