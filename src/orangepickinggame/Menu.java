@@ -28,7 +28,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.util.ResourceLoader;
 
 /**
- *
+ * The first screen presented to the user.
  * @author JasmeetKaur
  */
 public class Menu extends BasicGameState {
@@ -48,6 +48,12 @@ public class Menu extends BasicGameState {
         return menu;
     }
 
+    /**
+     * This method initializes all the images, music, and font.
+     * @param gc
+     * @param sbg
+     * @throws SlickException 
+     */
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         image = new Image("Images/gameBackground.PNG");
@@ -66,6 +72,13 @@ public class Menu extends BasicGameState {
 
     }
 
+    /**
+     * This method displays everything on the screen. 
+     * @param gc
+     * @param sbg
+     * @param g
+     * @throws SlickException 
+     */
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         g.drawImage(image, 0, 0);
@@ -75,7 +88,14 @@ public class Menu extends BasicGameState {
         instruction_image.draw(50, 250);
         
     }
-
+    
+    /**
+     * The input of user click is sent to the goToNextState method.
+     * @param gc
+     * @param sbg
+     * @param i
+     * @throws SlickException 
+     */
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         int xPos = Mouse.getX();
@@ -86,7 +106,7 @@ public class Menu extends BasicGameState {
     }
 
     /**
-     * this method decides what state to be returned based on user's 
+     * this method decides what state to be returned based on user's click.
      * @param xPos
      * @param yPos
      * @return 

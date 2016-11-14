@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static orangepickinggame.OrangePickingGame.instruct;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -23,7 +24,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.util.ResourceLoader;
 
 /**
- *
+ *When the player clicks on Instructions button, this screen is presented
  * @author JasmeetKaur
  */
 public class Instructions extends BasicGameState {
@@ -36,9 +37,16 @@ public class Instructions extends BasicGameState {
 
     @Override
     public int getID() {
-        return 2;
+        return instruct;
     }
 
+    /**
+     * This init method initiliazes the background and back images. 
+     * It also sets the font for this window.
+     * @param gc
+     * @param sbg
+     * @throws SlickException 
+     */
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         background = new Image("Images/patterns.PNG");
@@ -55,6 +63,14 @@ public class Instructions extends BasicGameState {
         
     }
 
+    /**
+     * This render method is displayed on the screen. Here, all 
+     * the instructions for the game are provided.
+     * @param gc
+     * @param sbg
+     * @param g
+     * @throws SlickException 
+     */
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         g.drawImage(background, 0, 0);
@@ -69,6 +85,14 @@ public class Instructions extends BasicGameState {
         g.drawString(xx + " " + yy, 300, 50);
     }
 
+    /**
+     * This method allows the user to click on the back button to be taken
+     * back to the menu screen. 
+     * @param gc
+     * @param sbg
+     * @param i
+     * @throws SlickException 
+     */
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         int xPos = Mouse.getX();

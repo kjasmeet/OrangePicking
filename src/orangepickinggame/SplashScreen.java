@@ -30,6 +30,8 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 import org.newdawn.slick.util.ResourceLoader;
 
 /**
+ * This screen is presened between each level to let the player know
+ * what goal to reach for to pass the next level.
  *
  * @author JasmeetKaur
  */
@@ -47,12 +49,24 @@ public class SplashScreen extends BasicGameState {
     public int getID() {
         return splashScreen;
     }
-
+    
+    /**
+     * Time is initialized at 5 seconds; so the player will have 5 seconds
+     * to look at the goals.
+     * @param gc
+     * @param sbg 
+     */
     @Override
     public void enter(GameContainer gc, StateBasedGame sbg) {
         time = 5000;
     }
-
+    
+    /**
+     * image is initialized and font is set
+     * @param gc
+     * @param sbg
+     * @throws SlickException 
+     */
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         slashBackground = new Image("Images/slashBackground.png");
@@ -66,6 +80,14 @@ public class SplashScreen extends BasicGameState {
             Logger.getLogger(Instructions.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    /**
+     * This method decides which screen to present based on the value of state int.
+     * @param gc
+     * @param sbg
+     * @param grphcs
+     * @throws SlickException 
+     */
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
@@ -90,6 +112,13 @@ public class SplashScreen extends BasicGameState {
         }
     }
 
+    /**
+     * Begins the transition to the window based on the value of int. 
+     * @param gc
+     * @param sbg
+     * @param i
+     * @throws SlickException 
+     */
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         time -= i;
@@ -104,7 +133,7 @@ public class SplashScreen extends BasicGameState {
             } else if (state == 0) {
                 sbg.enterState(play, new FadeOutTransition(Color.decode("#2fc38b")), new FadeInTransition(Color.black));
 
-            }
+            } 
         }
     }
 

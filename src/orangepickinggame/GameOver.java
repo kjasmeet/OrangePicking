@@ -28,7 +28,11 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 import org.newdawn.slick.util.ResourceLoader;
 
 /**
- *
+ * This class will appear after the player has failed
+ * to reach the goal set for that level. Gameover window
+ * will allow the user to either restart from level one 
+ * or go back to menu to view other options
+ * 
  * @author JasmeetKaur
  */
 public class GameOver extends BasicGameState {
@@ -44,6 +48,14 @@ public class GameOver extends BasicGameState {
     public int getID() {
         return gameOver;
     }
+    
+    /**
+     * This method sets the font for this class and initializes 
+     * two images: restart and goToMenu
+     * @param gc
+     * @param sbg
+     * @throws SlickException 
+     */
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
@@ -59,6 +71,15 @@ public class GameOver extends BasicGameState {
         }
     }
 
+    /**
+     * This method renders everything on the window.
+     * In this instance, it provides the player with options as to what
+     * to do next.
+     * @param gc
+     * @param sbg
+     * @param grphcs
+     * @throws SlickException 
+     */
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         font.drawString(50, 100, "Game over!!", Color.white);
@@ -69,7 +90,16 @@ public class GameOver extends BasicGameState {
         restart.draw(50, 300);
         goToMenu.draw(300, 300);
     }
-
+    
+    /**
+     * This method checks where the mouse is clicked by the player.
+     * Wherever it is clicked, the player will go to either menu window
+     * or Level 1 window. 
+     * @param gc
+     * @param sbg
+     * @param i
+     * @throws SlickException 
+     */
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         int xPos = Mouse.getX();
