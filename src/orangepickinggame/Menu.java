@@ -59,8 +59,8 @@ public class Menu extends BasicGameState {
         image = new Image("Images/gameBackground.PNG");
         playImage = new Image("Images/button_play.png");
         instruction_image = new Image("Images/button_instructions.png");
-        music = new Music("res/menu.wav");
-        music.loop();
+        /*music = new Music("res/menu.wav");
+        music.loop();*/
         try {
             InputStream inputStream = ResourceLoader.getResourceAsStream("Ubuntu-Title.ttf");
             Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
