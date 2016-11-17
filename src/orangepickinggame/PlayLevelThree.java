@@ -42,6 +42,7 @@ public class PlayLevelThree extends InitializeCode {
         super.setTime(30000);
         super.score = 0;
         super.x = 0; super.y = 0;
+        super.xHeight = 0; super.yHeight = 0;
     }
 
     /* initialize level*/
