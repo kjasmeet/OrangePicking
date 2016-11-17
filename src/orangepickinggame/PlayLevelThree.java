@@ -1,11 +1,16 @@
 package orangepickinggame;
 
+import static orangepickinggame.OrangePickingGame.congrats;
 import static orangepickinggame.OrangePickingGame.playLevelThree;
+import static orangepickinggame.OrangePickingGame.splashScreen;
+import static orangepickinggame.OrangePickingGame.state;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 /**
  *
@@ -36,6 +41,7 @@ public class PlayLevelThree extends InitializeCode {
     public void enter(GameContainer gc, StateBasedGame sbg){
         super.setTime(30000);
         super.score = 0;
+        super.x = 0; super.y = 0;
     }
 
     /* initialize level*/
@@ -56,7 +62,10 @@ public class PlayLevelThree extends InitializeCode {
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         super.update(gc, sbg, i);
-        
+        if (orangeGoal <= super.score) {
+            sbg.enterState(congrats, new FadeOutTransition(Color.decode("#2fc38b")), new FadeInTransition(Color.black));
+
+        }
         
     }
 
