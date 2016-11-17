@@ -36,6 +36,8 @@ public class Play extends InitializeCode {
     public void enter(GameContainer gc, StateBasedGame sbg){
         super.setTime(60000);
         super.score = 0;
+        super.x = 0; super.y = 0;
+        super.xHeight = 0; super.yHeight = 0;
     }
     
     /* initializes level*/
@@ -50,6 +52,7 @@ public class Play extends InitializeCode {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         super.render(gc, sbg, grphcs);
         font.drawString(50, 20, "Level 1 - Pick oranges!", Color.yellow);
+        
         
     }
 

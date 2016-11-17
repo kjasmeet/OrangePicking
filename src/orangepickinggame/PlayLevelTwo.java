@@ -43,6 +43,8 @@ public class PlayLevelTwo extends InitializeCode {
     public void enter(GameContainer gc, StateBasedGame sbg) {
         super.setTime(45000);
         super.score = 0;
+        super.x = 0; super.y = 0;
+        super.xHeight = 0; super.yHeight = 0;
     }
 
     @Override

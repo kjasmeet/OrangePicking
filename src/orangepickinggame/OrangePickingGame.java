@@ -21,6 +21,7 @@ public class OrangePickingGame extends StateBasedGame {
     public static final int playLevelTwo = 4;
     public static final int playLevelThree = 5;
     public static final int splashScreen = 6;
+    public static final int congrats = 7;
     public static int state = 0;
 
     public OrangePickingGame() {
