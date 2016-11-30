@@ -52,7 +52,7 @@ public class Play extends InitializeCode {
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         super.render(gc, sbg, grphcs);
-        font.drawString(50, 20, "Level 1 - Pick oranges!", Color.yellow);
+        font.drawString(50, 20, "Level 1 - Pick oranges!" + " " + getHighscore(), Color.yellow);
     
         
     }
@@ -64,6 +64,7 @@ public class Play extends InitializeCode {
         
         if (orangeGoal <= super.score) {
             state = 1;
+            super.setHighscore(super.score);
             sbg.enterState(splashScreen, new FadeOutTransition(Color.decode("#2fc38b")), new FadeInTransition(Color.black));
         }
     }

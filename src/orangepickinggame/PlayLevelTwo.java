@@ -99,11 +99,13 @@ public class PlayLevelTwo extends InitializeCode {
         /* move to new level if goal is accomplished*/
         if (orangeGoal <= super.score) {
             state = 2;
+            super.addScore(super.score);
             sbg.enterState(splashScreen, new FadeOutTransition(Color.decode("#2fc38b")), new FadeInTransition(Color.black));
         }
         
         /*Game over if lives run out*/ 
         if(lives <= 0){
+            super.addScore(super.score);
             sbg.enterState(gameOver);
         }
         

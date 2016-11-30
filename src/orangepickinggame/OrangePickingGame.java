@@ -34,6 +34,7 @@ public class OrangePickingGame extends StateBasedGame {
         this.addState(new PlayLevelTwo(playLevelTwo)); /* level 2 */
         this.addState(new PlayLevelThree(playLevelThree)); /* level 3 */
         this.addState(new SplashScreen(splashScreen)); /* transitional splash screen*/
+        this.addState(new Congratulations(congrats));
     }
 
     @Override

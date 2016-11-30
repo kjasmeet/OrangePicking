@@ -5,6 +5,7 @@
  */
 package orangepickinggame;
 
+import static orangepickinggame.InitializeCode.highscore;
 import static orangepickinggame.OrangePickingGame.congrats;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -18,6 +19,10 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class Congratulations extends BasicGameState {
 
+    Congratulations(int congrats) {
+        
+    }
+
     @Override
     public int getID() {
         return congrats;
@@ -29,6 +34,8 @@ public class Congratulations extends BasicGameState {
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
+        grphcs.drawString("Congratutions! You won!!", 100, 100);
+        grphcs.drawString("Your high score was: " + highscore, 100, 150);
     }
 
     @Override

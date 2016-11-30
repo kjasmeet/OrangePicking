@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import static orangepickinggame.OrangePickingGame.gameOver;
 import static orangepickinggame.OrangePickingGame.menu;
 import static orangepickinggame.OrangePickingGame.play;
+import static orangepickinggame.InitializeCode.highscore;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -82,11 +83,12 @@ public class GameOver extends BasicGameState {
      */
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
-        font.drawString(50, 100, "Game over!!", Color.white);
+        font.drawString(50, 100, "Game over!", Color.white);
+        font.drawString(50, 50, "Your high score was: " + highscore + "!", Color.white);
         font.drawString(50, 150, "Choose your options from below", Color.white);
         int xPos = Mouse.getX();
         int yPos = Mouse.getY();
-        font.drawString(100, 400, xPos + " " + yPos, Color.yellow);
+       // font.drawString(100, 400, xPos + " " + yPos, Color.yellow);
         restart.draw(50, 300);
         goToMenu.draw(300, 300);
     }

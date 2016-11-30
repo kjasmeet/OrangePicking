@@ -57,6 +57,8 @@ public class InitializeCode extends BasicGameState{
     int numOs = 150;
     /* font for messages to be displayed*/
     TrueTypeFont font;
+    /*get highscore */
+    static int highscore;
     
     static final int UP = 0;
     static final int DOWN = 1;
@@ -258,6 +260,19 @@ public class InitializeCode extends BasicGameState{
         } catch (FontFormatException | IOException ex) {
             Logger.getLogger(Instructions.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void setHighscore(int highscore){
+        this.highscore = highscore;
+    }
+    
+    public int getHighscore(){
+        return highscore;
+    }
+    
+    public int addScore(int currentScore){
+        highscore = highscore + currentScore;
+        return highscore;
     }
     
 }
