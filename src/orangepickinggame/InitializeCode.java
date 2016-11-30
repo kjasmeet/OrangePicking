@@ -188,7 +188,7 @@ public class InitializeCode extends BasicGameState{
     */
     @Override
     public void keyPressed(int key, char c) {
-
+        
         switch (key) {
             case Input.KEY_RIGHT:
                 sprite = right;
@@ -197,7 +197,7 @@ public class InitializeCode extends BasicGameState{
                      x = 10;
                      yHeight += 20;
                      yBox++;
-                }else if(x < 600){
+                }else if(x < 590){
                     x += 20;
                     player.setX(x);
                 }

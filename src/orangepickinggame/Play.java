@@ -13,13 +13,12 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
  * @author JasmeetKaur
  */
 /* Level 1 - "bare bones" level, will include only basic functionality (increased in later levels)
-   Easiest difficulty
-*/
-
+ Easiest difficulty
+ */
 public class Play extends InitializeCode {
-/* methods are defined, for the most part, in InitializeCode. This extends.*/
     
-    int orangeGoal = 5; 
+    /* methods are defined, for the most part, in InitializeCode. This extends.*/
+    int orangeGoal = 5;
     
     /* constructor for level*/
     public Play(int playState) {
@@ -30,21 +29,23 @@ public class Play extends InitializeCode {
     public int getID() {
         return play;
     }
-    
+
     /* enters level. sets time limit for this specific instance*/
     @Override
-    public void enter(GameContainer gc, StateBasedGame sbg){
+    public void enter(GameContainer gc, StateBasedGame sbg) {
         super.setTime(60000);
         super.score = 0;
-        super.x = 0; super.y = 0;
-        super.xHeight = 0; super.yHeight = 0;
+        super.x = 0;
+        super.y = 0;
+        super.xHeight = 0;
+        super.yHeight = 0;
     }
-    
+
     /* initializes level*/
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         super.init(gc, sbg);
-
+        
     }
 
     /* renders graphics for level*/
@@ -52,7 +53,7 @@ public class Play extends InitializeCode {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         super.render(gc, sbg, grphcs);
         font.drawString(50, 20, "Level 1 - Pick oranges!", Color.yellow);
-        
+    
         
     }
 
@@ -61,7 +62,7 @@ public class Play extends InitializeCode {
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         super.update(gc, sbg, i);
         
-        if(orangeGoal <= super.score){
+        if (orangeGoal <= super.score) {
             state = 1;
             sbg.enterState(splashScreen, new FadeOutTransition(Color.decode("#2fc38b")), new FadeInTransition(Color.black));
         }
@@ -73,5 +74,4 @@ public class Play extends InitializeCode {
         super.keyPressed(key, c);
     }
     
-
 }

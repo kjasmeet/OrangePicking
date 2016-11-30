@@ -1,13 +1,13 @@
 package orangepickinggame;
 
+import java.util.ArrayList;
 import static orangepickinggame.OrangePickingGame.congrats;
 import static orangepickinggame.OrangePickingGame.playLevelThree;
-import static orangepickinggame.OrangePickingGame.splashScreen;
-import static orangepickinggame.OrangePickingGame.state;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
@@ -18,13 +18,15 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
  */
 
 /* Level 3 - will eventually contain a version of initial level in which the player cannot retrace steps
-   Increased difficulty in orange collection goal and time limit
-*/
-
+ Increased difficulty in orange collection goal and time limit
+ */
 public class PlayLevelThree extends InitializeCode {
-/* methods are defined, for the most part, in InitializeCode. This extends.*/
-    int orangeGoal = 10; 
+    /* methods are defined, for the most part, in InitializeCode. This extends.*/
+    int orangeGoal = 10;
     
+    ArrayList<Rectangle> rects = new ArrayList<>();
+    int xrec = 0, yrec = 0;
+
     /* constructor for level*/
     public PlayLevelThree(int playState) {
         super();
@@ -33,16 +35,18 @@ public class PlayLevelThree extends InitializeCode {
     @Override
     public int getID() {
         return playLevelThree;
-        
+
     }
-    
+
     /* enter level, sets time limit*/
     @Override
-    public void enter(GameContainer gc, StateBasedGame sbg){
+    public void enter(GameContainer gc, StateBasedGame sbg) {
         super.setTime(30000);
         super.score = 0;
-        super.x = 0; super.y = 0;
-        super.xHeight = 0; super.yHeight = 0;
+        super.x = 0;
+        super.y = 0;
+        super.xHeight = 0;
+        super.yHeight = 0;
     }
 
     /* initialize level*/
@@ -57,17 +61,26 @@ public class PlayLevelThree extends InitializeCode {
         super.render(gc, sbg, grphcs);
         font.drawString(50, 20, "Level 3 - Watch where you step!", Color.yellow);
         
+        for(Rectangle rect: rects){
+            grphcs.setColor(Color.red);
+            grphcs.fill(rect);
+        }
     }
 
     /* update graphics*/
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         super.update(gc, sbg, i);
+        
+        if(super.x >=0 && super.y >= 0){
+            rects.add(new Rectangle(super.x, super.y, 20, 20));
+        }
+        
         if (orangeGoal <= super.score) {
             sbg.enterState(congrats, new FadeOutTransition(Color.decode("#2fc38b")), new FadeInTransition(Color.black));
 
         }
-        
+
     }
 
     /* change location of sprite based on key presses*/
