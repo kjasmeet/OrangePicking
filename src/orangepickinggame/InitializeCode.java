@@ -58,6 +58,12 @@ public class InitializeCode extends BasicGameState{
     /* font for messages to be displayed*/
     TrueTypeFont font;
     
+    static final int UP = 0;
+    static final int DOWN = 1;
+    static final int LEFT = 2;
+    static final int RIGHT = 3;
+    int keyPress = RIGHT;
+    
     /*orange collection declarations*/
     Orange o[] = new Orange[numOs]; /* array of orange objects for whole map*/
     boolean isDrawn[] = new boolean[numOs]; /* array of booleans to mark if orange is displayed (will be false if picked up already*/
@@ -186,7 +192,7 @@ public class InitializeCode extends BasicGameState{
         switch (key) {
             case Input.KEY_RIGHT:
                 sprite = right;
-                
+                keyPress = RIGHT;
                 if (yHeight < 80 && x >= 590) {
                      x = 10;
                      yHeight += 20;
@@ -197,6 +203,7 @@ public class InitializeCode extends BasicGameState{
                 }
                 break;
             case Input.KEY_LEFT:
+                keyPress = LEFT;
                 sprite = left;
                 if (x >= 20) {
                     x -= 20;
@@ -210,6 +217,7 @@ public class InitializeCode extends BasicGameState{
 
                 break;
             case Input.KEY_DOWN:
+                keyPress = DOWN;
                 sprite = down;
                 
                 if (y >= 600 && xHeight < 80 ) {
@@ -223,6 +231,7 @@ public class InitializeCode extends BasicGameState{
                 
                 break;
             case Input.KEY_UP:
+                keyPress = UP;
                 sprite = up;
                 if (y >= 20) {
                     y -= 20;

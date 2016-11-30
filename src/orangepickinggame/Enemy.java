@@ -20,7 +20,7 @@ public class Enemy {
     int dr;
     
     public Enemy(int xl, int yl, int xbox, int ybox, int ind, Animation dir, int d){
-        enemyrec = new Rectangle(xl,yl,50,25);
+        enemyrec = new Rectangle(xl,yl,25,25);
         x = xl;
         y = yl;
         index = ind;

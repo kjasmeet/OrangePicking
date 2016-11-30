@@ -9,6 +9,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -109,7 +110,7 @@ public class PlayLevelTwo extends InitializeCode {
         }
         
         for(int j = 0; j<numEnemies; j++){
-            if(e[i].getDir() == 0){
+            /*if(e[i].getDir() == 0){
                 e[i].updateRectangle(20, 0);
                 if((e[i].getXBox()>4)&&(e[i].getYBox()>4)){
                     e[i].setDir(1);
@@ -122,10 +123,25 @@ public class PlayLevelTwo extends InitializeCode {
                     e[i].setDir(0);
                     e[i].setDirection(enemyRight);
                 }
-            }
+            }*/
             if(player.intersects(e[j].getRectangle())){
                 if((e[j].getXBox()==xBox)&&(e[j].getYBox()==yBox)){
-                    lives-=1;
+                    lives-=1; 
+                    switch(keyPress){
+                        case UP:
+                            keyPressed(Input.KEY_DOWN, ' ');
+                            keyPressed(Input.KEY_DOWN, ' ');
+                        case DOWN:
+                            keyPressed(Input.KEY_UP, ' ');
+                            keyPressed(Input.KEY_UP, ' ');
+                        case LEFT:
+                            keyPressed(Input.KEY_RIGHT, ' ');
+                            keyPressed(Input.KEY_RIGHT, ' ');
+                        case RIGHT:
+                            keyPressed(Input.KEY_LEFT, ' ');
+                            keyPressed(Input.KEY_LEFT, ' ');
+                    }
+                        
                 }
             }
         }
