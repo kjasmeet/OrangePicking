@@ -111,7 +111,7 @@ public class PlayLevelTwo extends InitializeCode {
             /*e[i].updateRectangle(20, 0);*/
             if(player.intersects(e[j].getRectangle())){
                 if((e[j].getXBox()==xBox)&&(e[j].getYBox()==yBox)){
-                    lives-=1;       
+                    lives-=i*3;       
                 }
             }
         }

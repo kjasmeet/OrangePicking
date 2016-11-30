@@ -59,10 +59,10 @@ public class PlayLevelThree extends InitializeCode {
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         super.render(gc, sbg, grphcs);
-        font.drawString(50, 20, "Level 3 - Watch where you step!", Color.yellow);
+        font.drawString(50, 20, "Level 3 - Watch where you step!" + xrec/1000 + " " + yrec/1000, Color.yellow);
         
         for(Rectangle rect: rects){
-            grphcs.setColor(Color.red);
+            grphcs.setColor(Color.gray);
             grphcs.fill(rect);
         }
     }
