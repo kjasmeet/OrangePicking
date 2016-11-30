@@ -1,16 +1,12 @@
 package orangepickinggame;
 
-import java.util.ArrayList;
 import static orangepickinggame.OrangePickingGame.play;
 import static orangepickinggame.OrangePickingGame.state;
 import static orangepickinggame.OrangePickingGame.splashScreen;
 import org.newdawn.slick.*;
-import org.newdawn.slick.fills.GradientFill;
-import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
-import org.newdawn.slick.svg.Gradient;
 
 /**
  *

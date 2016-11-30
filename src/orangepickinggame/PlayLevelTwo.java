@@ -45,7 +45,7 @@ public class PlayLevelTwo extends InitializeCode {
         super.score = 0;
         super.x = 0; super.y = 0;
         super.xHeight = 0; super.yHeight = 0;
-        lives = 50;
+        lives = 3000;
     }
 
     @Override
@@ -82,7 +82,7 @@ public class PlayLevelTwo extends InitializeCode {
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         super.render(gc, sbg, grphcs);
-        font.drawString(420, 80, "Lives left: " + lives, Color.yellow);
+        font.drawString(420, 80, "Lives left: " + lives/1000, Color.yellow);
         font.drawString(50, 20, "Level 2 - Avoid the enemies!", Color.yellow);
         
         for(int i=0;i<numEnemies;i++){
@@ -125,7 +125,7 @@ public class PlayLevelTwo extends InitializeCode {
             }
             if(player.intersects(e[j].getRectangle())){
                 if((e[j].getXBox()==xBox)&&(e[j].getYBox()==yBox)){
-                    lives-=1;
+                    lives-=i;
                 }
             }
         }
