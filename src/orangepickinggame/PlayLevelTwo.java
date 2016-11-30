@@ -20,18 +20,18 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
  * @author JasmeetKaur
  */
 /* Level 2 - will eventually contain version of level in which enemies can kill you. Will include 3 lives
-   Increased difficulty in orange collection goal and time limit
-*/
-
+ Increased difficulty in orange collection goal and time limit
+ */
 public class PlayLevelTwo extends InitializeCode {
-/* methods are defined, for the most part, in InitializeCode. This extends.*/
+    /* methods are defined, for the most part, in InitializeCode. This extends.*/
 
     int orangeGoal = 7;
     int lives;
-    int numEnemies = 1;
-    
+    int numEnemies = 300;
+    int update = 0;
+
     private Animation enemy;
-    
+
     Enemy e[] = new Enemy[numEnemies];
 
     /* constructor for level*/
@@ -44,9 +44,12 @@ public class PlayLevelTwo extends InitializeCode {
     public void enter(GameContainer gc, StateBasedGame sbg) {
         super.setTime(45000);
         super.score = 0;
-        super.x = 0; super.y = 0;
-        super.xHeight = 0; super.yHeight = 0;
+        super.x = 0;
+        super.y = 0;
+        super.xHeight = 0;
+        super.yHeight = 0;
         lives = 3000;
+        
     }
 
     @Override
@@ -58,22 +61,23 @@ public class PlayLevelTwo extends InitializeCode {
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         super.init(gc, sbg);
-        
+
         Image[] en = {new Image("Images/butterfly1.png"), new Image("Images/butterfly1.png")};
-        int[] duration = {300,300};
+        int[] duration = {300, 300};
         enemy = new Animation(en, duration, false);
-        
+
         int k = 200;
         int bx = 0;
         int by = 0;
-        
-        for(int i = 0; i<numEnemies;i++){
-            if(k>=600){
-                k-=600;
+
+        for (int i = 0; i < numEnemies; i++) {
+            if (k >= 600) {
+                k -= 600;
                 bx++;
+
             }
-            e[i] = new Enemy(20,k,bx,by,i,enemy);
-            k+=200;
+            e[i] = new Enemy(200, k, bx, by, i, enemy);
+            k += 200;
         }
     }
 
@@ -81,12 +85,14 @@ public class PlayLevelTwo extends InitializeCode {
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         super.render(gc, sbg, grphcs);
-        font.drawString(420, 80, "Lives left: " + lives/1000, Color.yellow);
-        font.drawString(50, 20, "Level 2 - Avoid the enemies!", Color.yellow);
+        font.drawString(420, 80, "Lives left: " + lives / 1000, Color.yellow);
+        font.drawString(50, 20, "Level 2 - Avoid the enemies!" + update, Color.yellow);
+
         
-        for(int i=0;i<numEnemies;i++){
-            if((e[i].getXBox()==xBox)&&(e[i].getYBox()==yBox)){
-                e[i].getAnim().draw(e[i].getXVal(),e[i].getYVal());
+        for (int i = 0; i < numEnemies; i++) {
+            if ((e[i].getXBox() == xBox) && (e[i].getYBox() == yBox)) {
+                e[i].getAnim().draw(e[i].getXVal(), e[i].getYVal());
+                //e[i].updateRectangle((update / 1000), e[i].getYVal());
             }
         }
     }
@@ -102,18 +108,20 @@ public class PlayLevelTwo extends InitializeCode {
             super.addScore(super.score);
             sbg.enterState(splashScreen, new FadeOutTransition(Color.decode("#2fc38b")), new FadeInTransition(Color.black));
         }
-        
-        /*Game over if lives run out*/ 
-        if(lives <= 0){
+
+        /*Game over if lives run out*/
+        if (lives <= 0) {
             super.addScore(super.score);
             sbg.enterState(gameOver);
         }
-        
-        for(int j = 0; j<numEnemies; j++){
-            /*e[i].updateRectangle(i, 0);*/
-            if(player.intersects(e[j].getRectangle())){
-                if((e[j].getXBox()==xBox)&&(e[j].getYBox()==yBox)){
-                    lives-=i*3;       
+
+        for (int j = 0; j < numEnemies; j++) {
+            // e[i].updateRectangle(update, j);
+            if (player.intersects(e[j].getRectangle())) {
+                if ((e[j].getXBox() == xBox) && (e[j].getYBox() == yBox)) {
+                    lives -= i * 5;
+                    super.x = 0;
+                    super.y = 0;
                 }
             }
         }

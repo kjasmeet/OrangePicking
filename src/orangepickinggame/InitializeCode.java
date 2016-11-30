@@ -168,6 +168,7 @@ public class InitializeCode extends BasicGameState{
         /* updates time. if time is up, moves to gameOver state*/
         time -= i;
         if (time <= 0.0) {
+            highscore += score;
             sbg.enterState(gameOver);
         }
         

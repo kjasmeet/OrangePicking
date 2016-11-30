@@ -52,7 +52,7 @@ public class Enemy {
     
     public void updateRectangle(int plusX, int plusY){
         x +=plusX;
-        y +=plusY;
+        //y +=plusY;
         if(x>=580){
             BoxX++;
             x-=580;
@@ -65,10 +65,10 @@ public class Enemy {
             BoxX=0;
             x = 20;
         }
-        if(BoxY>4){
-            BoxY=0;
-            y = 20;
-        }
+//        if(BoxY>4){
+//            BoxY=0;
+//            y = 20;
+//        }
         enemyrec.setX(x);
         enemyrec.setY(y);
     }
