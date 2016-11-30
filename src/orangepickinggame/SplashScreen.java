@@ -30,7 +30,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 import org.newdawn.slick.util.ResourceLoader;
 
 /**
- * This screen is presened between each level to let the player know
+ * This screen is presented between each level to let the player know
  * what goal to reach for to pass the next level.
  *
  * @author JasmeetKaur
@@ -94,21 +94,20 @@ public class SplashScreen extends BasicGameState {
         slashBackground.draw(0, 0);
         double calculateTime = time / 1000;
         DecimalFormat df = new DecimalFormat("#");
-        Color purple = Color.decode("#8A2BE2");
-        font.drawString(50, 100, "Goal: ", purple);
+        font.drawString(50, 100, "Goal: ", Color.white);
         
-        font.drawString(200, 300, df.format(calculateTime), Color.red);
+        font.drawString(200, 300, df.format(calculateTime), Color.yellow);
         if (state == 1) {
-            font.drawString(50, 50, "Congratulations!", purple);
-            font.drawString(50, 150, "Collect 7 oranges in 45 seconds!", purple);
-            font.drawString(50, 200, "Level 2 starts in", purple);
+            font.drawString(50, 50, "Congratulations!", Color.white);
+            font.drawString(50, 150, "Collect 7 oranges in 45 seconds!", Color.white);
+            font.drawString(50, 200, "Level 2 starts in", Color.white);
         } else if (state == 2) {
-            font.drawString(50, 50, "Congratulations!", purple);
-            font.drawString(50, 150, "Collect 10 oranges in 30 seconds!", purple);
-            font.drawString(50, 200, "Level 3 starts in", purple);
+            font.drawString(50, 50, "Congratulations!", Color.white);
+            font.drawString(50, 150, "Collect 10 oranges in 30 seconds!", Color.white);
+            font.drawString(50, 200, "Level 3 starts in", Color.white);
         } else if (state == 0) {
-            font.drawString(50, 150, "Collect 5 oranges in 60 seconds!", purple);
-            font.drawString(50, 200, "Level 1 starts in", purple);
+            font.drawString(50, 150, "Collect 5 oranges in 60 seconds!", Color.white);
+            font.drawString(50, 200, "Level 1 starts in", Color.white);
         }
     }
 
