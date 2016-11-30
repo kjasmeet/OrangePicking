@@ -1,6 +1,7 @@
 package orangepickinggame;
 
 import java.util.ArrayList;
+import static orangepickinggame.InitializeCode.RIGHT;
 import static orangepickinggame.OrangePickingGame.congrats;
 import static orangepickinggame.OrangePickingGame.gameOver;
 import static orangepickinggame.OrangePickingGame.playLevelThree;
@@ -9,6 +10,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
@@ -25,15 +27,16 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
  */
 public class PlayLevelThree extends InitializeCode {
     /* methods are defined, for the most part, in InitializeCode. This extends.*/
-    int orangeGoal = 10;
-    
+
+    int orangeGoal = 1;
+
     ArrayList<Rectangle> rects = new ArrayList<>();
     int xrec = 0, yrec = 0;
-    
+
     int lives;
-    int numEnemies = 300;
+    int numEnemies = 30;
     int update = 0;
-    
+    int flag = 0;
     int index = 0;
     ArrayList<Point> point = new ArrayList<>();
     private Animation enemy;
@@ -53,7 +56,7 @@ public class PlayLevelThree extends InitializeCode {
 
     /* enter level, sets time limit*/
     @Override
-    public void enter(GameContainer gc, StateBasedGame sbg) {
+    public void enter(GameContainer gc, StateBasedGame sbg) throws SlickException {
         super.setTime(30000);
         super.score = 0;
         super.x = 0;
@@ -67,23 +70,16 @@ public class PlayLevelThree extends InitializeCode {
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         super.init(gc, sbg);
-        
+
         Image[] en = {new Image("Images/butterfly1.png"), new Image("Images/butterfly1.png")};
         int[] duration = {300, 300};
         enemy = new Animation(en, duration, false);
 
-        int k = 200;
-        int bx = 0;
-        int by = 0;
-
         for (int i = 0; i < numEnemies; i++) {
-            if (k >= 600) {
-                k -= 600;
-                bx++;
-
-            }
-            e[i] = new Enemy(200, k, bx, by, i, enemy);
-            k += 200;
+            int enemyValX = (int) (Math.random() * (600*5));
+            int enemyValY = (int) (Math.random() * (600*5));
+            e[i] = new Enemy(enemyValX, enemyValY, enemyValX/600, enemyValY/600, i, enemy);
+            
         }
     }
 
@@ -92,19 +88,28 @@ public class PlayLevelThree extends InitializeCode {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         super.render(gc, sbg, grphcs);
         font.drawString(50, 20, "Level 3 - Watch where you step!" + getHighscore(), Color.yellow);
-        
-        for(int i = 0; i < rects.size(); i++){
+
+        for (int i = 0; i < rects.size(); i++) {
             grphcs.setColor(Color.orange);
-            if(point.get(i).pointX == xBox && point.get(i).pointY == yBox){
+            if (point.get(i).pointX == xBox && point.get(i).pointY == yBox) {
                 grphcs.fill(rects.get(i));
             }
-            
+
         }
-        
+
         for (int i = 0; i < numEnemies; i++) {
             if ((e[i].getXBox() == xBox) && (e[i].getYBox() == yBox)) {
+                
                 e[i].getAnim().draw(e[i].getXVal(), e[i].getYVal());
-                //e[i].updateRectangle((update / 1000), e[i].getYVal());
+                
+                if(e[i].getXVal() < 400){
+                    flag = 1;
+                    e[i].updateRectangle((update / 1000), e[i].getYVal());
+                }else if(e[i].getXVal() >= 400) {
+                    flag = 2;
+                    e[i].updateRectangle((update / 1000), e[i].getYVal());
+                }
+                
             }
         }
     }
@@ -113,27 +118,32 @@ public class PlayLevelThree extends InitializeCode {
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         super.update(gc, sbg, i);
+        if(flag == 1){
+            update += i;
+        }else if(flag == 2){
+            update -= i;
+        }
         
-        if(super.x >= 0 && super.y >= 0){
+
+        if (super.x >= 0 && super.y >= 0) {
             point.add(index, new Point(index, super.xBox, super.yBox));
             rects.add(index, new Rectangle(super.x, super.y, 20, 20));
             index++;
-            
+
         }
-        
+
         if (orangeGoal <= super.score) {
             super.addScore(super.score);
             sbg.enterState(congrats, new FadeOutTransition(Color.decode("#2fc38b")), new FadeInTransition(Color.black));
 
         }
-        
-        if (lives < 0) {
+
+        if (lives <= 0) {
             super.addScore(super.score);
             sbg.enterState(gameOver);
         }
 
         for (int j = 0; j < numEnemies; j++) {
-            // e[i].updateRectangle(update, j);
             if (player.intersects(e[j].getRectangle())) {
                 if ((e[j].getXBox() == xBox) && (e[j].getYBox() == yBox)) {
                     lives -= i * 5;
@@ -142,7 +152,15 @@ public class PlayLevelThree extends InitializeCode {
                 }
             }
         }
-        
+
+        for (int d = 0; d < rects.size(); d++) {
+            if (point.get(d).pointX == xBox && point.get(d).pointY == yBox) {
+                if (player.intersects(rects.get(d))) {
+
+                }
+            }
+
+        }
 
     }
 

@@ -25,9 +25,10 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class PlayLevelTwo extends InitializeCode {
     /* methods are defined, for the most part, in InitializeCode. This extends.*/
 
-    int orangeGoal = 7;
+    int orangeGoal = 1;
     int lives;
-    int numEnemies = 300;
+    int numEnemies = 30;
+    int flag = 0;
     int update = 0;
 
     private Animation enemy;
@@ -67,18 +68,11 @@ public class PlayLevelTwo extends InitializeCode {
         int[] duration = {300, 300};
         enemy = new Animation(en, duration, false);
 
-        int k = 200;
-        int bx = 0;
-        int by = 0;
-
         for (int i = 0; i < numEnemies; i++) {
-            if (k >= 600) {
-                k -= 600;
-                bx++;
-
-            }
-            e[i] = new Enemy(200, k, bx, by, i, enemy);
-            k += 200;
+            int enemyValX = (int) (Math.random() * (600*5));
+            int enemyValY = (int) (Math.random() * (600*5));
+            e[i] = new Enemy(enemyValX, enemyValY, enemyValX/600, enemyValY/600, i, enemy);
+           
         }
     }
 
@@ -93,7 +87,14 @@ public class PlayLevelTwo extends InitializeCode {
         for (int i = 0; i < numEnemies; i++) {
             if ((e[i].getXBox() == xBox) && (e[i].getYBox() == yBox)) {
                 e[i].getAnim().draw(e[i].getXVal(), e[i].getYVal());
-                //e[i].updateRectangle((update / 1000), e[i].getYVal());
+                if(e[i].getXVal() < 400){
+                    flag = 1;
+                    e[i].updateRectangle((update / 1000), e[i].getYVal());
+                }else if(e[i].getXVal() >= 400) {
+                    flag = 2;
+                    e[i].updateRectangle((update / 1000), e[i].getYVal());
+                }
+               
             }
         }
     }
@@ -103,6 +104,12 @@ public class PlayLevelTwo extends InitializeCode {
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         super.update(gc, sbg, i);
         
+        if(flag == 1){
+            update += i;
+        }else if(flag == 2){
+            update -= i;
+        }
+        
         /* move to new level if goal is accomplished*/
         if (orangeGoal <= super.score) {
             state = 2;
@@ -111,7 +118,7 @@ public class PlayLevelTwo extends InitializeCode {
         }
 
         /*Game over if lives run out*/
-        if (lives < 0) {
+        if (lives <= 0) {
             super.addScore(super.score);
             sbg.enterState(gameOver);
         }

@@ -37,7 +37,7 @@ public class InitializeCode extends BasicGameState{
     /* tmx map that will serve as background for all levels*/
     private TiledMap map;
     /* animated sprite - images for each of the 4 directions so it looks like it is turning*/
-    private Animation sprite, up, down, left, right;
+    Animation sprite, up, down, left, right;
     /*start coordinates for the sprite*/
     int x = 20, y = 20;
     /* time limit for level*/

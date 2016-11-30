@@ -6,7 +6,6 @@
 
 package orangepickinggame;
 
-import javax.swing.text.html.parser.Entity;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.geom.Rectangle;
 
@@ -51,20 +50,20 @@ public class Enemy {
     }
     
     public void updateRectangle(int plusX, int plusY){
-        x +=plusX;
+        x += plusX;
         //y +=plusY;
-        if(x>=580){
-            BoxX++;
-            x-=580;
-        }
-        if(y>=580){
-            BoxY++;
-            y-=580;
-        }
-        if(BoxX>4){
-            BoxX=0;
-            x = 20;
-        }
+//        if(x>=580){
+//            BoxX++;
+//            x-=580;
+//        }
+//        if(y>=580){
+//            BoxY++;
+//            y-=580;
+//        }
+//        if(BoxX>4){
+//            BoxX=0;
+//            x = 20;
+//        }
 //        if(BoxY>4){
 //            BoxY=0;
 //            y = 20;
