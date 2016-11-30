@@ -126,22 +126,7 @@ public class PlayLevelTwo extends InitializeCode {
             }*/
             if(player.intersects(e[j].getRectangle())){
                 if((e[j].getXBox()==xBox)&&(e[j].getYBox()==yBox)){
-                    lives-=1; 
-                    switch(keyPress){
-                        case UP:
-                            keyPressed(Input.KEY_DOWN, ' ');
-                            keyPressed(Input.KEY_DOWN, ' ');
-                        case DOWN:
-                            keyPressed(Input.KEY_UP, ' ');
-                            keyPressed(Input.KEY_UP, ' ');
-                        case LEFT:
-                            keyPressed(Input.KEY_RIGHT, ' ');
-                            keyPressed(Input.KEY_RIGHT, ' ');
-                        case RIGHT:
-                            keyPressed(Input.KEY_LEFT, ' ');
-                            keyPressed(Input.KEY_LEFT, ' ');
-                    }
-                        
+                    lives-=1;       
                 }
             }
         }
