@@ -6,6 +6,7 @@
 
 package orangepickinggame;
 
+import javax.swing.text.html.parser.Entity;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.geom.Rectangle;
 
@@ -20,7 +21,7 @@ public class Enemy {
     int dr;
     
     public Enemy(int xl, int yl, int xbox, int ybox, int ind, Animation image){
-        enemyrec = new Rectangle(xl,yl,50,50);
+        enemyrec = new Rectangle(xl,yl,25,25);
         x = xl;
         y = yl;
         index = ind;
@@ -52,19 +53,21 @@ public class Enemy {
     public void updateRectangle(int plusX, int plusY){
         x +=plusX;
         y +=plusY;
-        if(x>=600){
+        if(x>=580){
             BoxX++;
-            x-=600;
+            x-=580;
         }
-        if(y>=600){
+        if(y>=580){
             BoxY++;
-            y-=600;
+            y-=580;
         }
         if(BoxX>4){
             BoxX=0;
+            x = 20;
         }
         if(BoxY>4){
             BoxY=0;
+            y = 20;
         }
         enemyrec.setX(x);
         enemyrec.setY(y);

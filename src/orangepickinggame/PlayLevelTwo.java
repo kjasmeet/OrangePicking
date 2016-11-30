@@ -28,7 +28,7 @@ public class PlayLevelTwo extends InitializeCode {
 
     int orangeGoal = 7;
     int lives;
-    int numEnemies = 14;
+    int numEnemies = 1;
     
     private Animation enemy;
     
@@ -108,7 +108,7 @@ public class PlayLevelTwo extends InitializeCode {
         }
         
         for(int j = 0; j<numEnemies; j++){
-            /*e[i].updateRectangle(20, 0);*/
+            /*e[i].updateRectangle(i, 0);*/
             if(player.intersects(e[j].getRectangle())){
                 if((e[j].getXBox()==xBox)&&(e[j].getYBox()==yBox)){
                     lives-=i*3;       
