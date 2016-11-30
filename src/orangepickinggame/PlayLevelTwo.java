@@ -30,7 +30,7 @@ public class PlayLevelTwo extends InitializeCode {
     int lives;
     int numEnemies = 14;
     
-    private Animation enemyLeft, enemyRight;
+    private Animation enemy;
     
     Enemy e[] = new Enemy[numEnemies];
 
@@ -59,11 +59,9 @@ public class PlayLevelTwo extends InitializeCode {
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         super.init(gc, sbg);
         
-        Image[] enLeft = {new Image("Images/enemyLEFT.png"), new Image("Images/enemyLEFT.png")};
-        Image[] enRight = {new Image("Images/enemyRIGHT.png"), new Image("Images/enemyRIGHT.png")};
+        Image[] en = {new Image("Images/butterfly1.png"), new Image("Images/butterfly1.png")};
         int[] duration = {300,300};
-        enemyLeft = new Animation(enLeft, duration, false);
-        enemyRight = new Animation(enRight, duration, false);
+        enemy = new Animation(en, duration, false);
         
         int k = 200;
         int bx = 0;
@@ -74,7 +72,7 @@ public class PlayLevelTwo extends InitializeCode {
                 k-=600;
                 bx++;
             }
-            e[i] = new Enemy(20,k,bx,by,i,enemyRight,0);
+            e[i] = new Enemy(20,k,bx,by,i,enemy);
             k+=200;
         }
     }
@@ -88,7 +86,7 @@ public class PlayLevelTwo extends InitializeCode {
         
         for(int i=0;i<numEnemies;i++){
             if((e[i].getXBox()==xBox)&&(e[i].getYBox()==yBox)){
-                e[i].getDirection().draw(e[i].getXVal(),e[i].getYVal());
+                e[i].getAnim().draw(e[i].getXVal(),e[i].getYVal());
             }
         }
     }
@@ -110,20 +108,7 @@ public class PlayLevelTwo extends InitializeCode {
         }
         
         for(int j = 0; j<numEnemies; j++){
-            /*if(e[i].getDir() == 0){
-                e[i].updateRectangle(20, 0);
-                if((e[i].getXBox()>4)&&(e[i].getYBox()>4)){
-                    e[i].setDir(1);
-                    e[i].setDirection(enemyLeft);
-                }
-            }
-            else if(e[i].getDir()==1){
-                e[i].updateRectangle(-20, 0);
-                if((e[i].getXBox()<0)&&(e[i].getYBox()<0)){
-                    e[i].setDir(0);
-                    e[i].setDirection(enemyRight);
-                }
-            }*/
+            /*e[i].updateRectangle(20, 0);*/
             if(player.intersects(e[j].getRectangle())){
                 if((e[j].getXBox()==xBox)&&(e[j].getYBox()==yBox)){
                     lives-=1;       

@@ -16,18 +16,17 @@ import org.newdawn.slick.geom.Rectangle;
 public class Enemy {
     private Rectangle enemyrec;
     int x, y, BoxX, BoxY, index;
-    private Animation direction;
+    private Animation anim;
     int dr;
     
-    public Enemy(int xl, int yl, int xbox, int ybox, int ind, Animation dir, int d){
-        enemyrec = new Rectangle(xl,yl,50,25);
+    public Enemy(int xl, int yl, int xbox, int ybox, int ind, Animation image){
+        enemyrec = new Rectangle(xl,yl,50,50);
         x = xl;
         y = yl;
         index = ind;
         BoxX = xbox;
         BoxY = ybox;
-        direction = dir;
-        dr = d; /* 0 = right, 1 = left */
+        anim = image;
     }
     
     public int getXVal(){
@@ -61,23 +60,17 @@ public class Enemy {
             BoxY++;
             y-=600;
         }
+        if(BoxX>4){
+            BoxX=0;
+        }
+        if(BoxY>4){
+            BoxY=0;
+        }
         enemyrec.setX(x);
         enemyrec.setY(y);
     }
     
-    public Animation getDirection(){
-        return direction;
+    public Animation getAnim(){
+        return anim;
     }
-    
-    public void setDirection(Animation d){
-        direction = d;
-    }
-    
-    public void setDir(int d){
-        dr = d;
-    }
-    public int getDir(){
-        return dr;
-    }
-    
 }
