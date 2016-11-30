@@ -111,7 +111,7 @@ public class PlayLevelTwo extends InitializeCode {
         }
 
         /*Game over if lives run out*/
-        if (lives <= 0) {
+        if (lives < 0) {
             super.addScore(super.score);
             sbg.enterState(gameOver);
         }

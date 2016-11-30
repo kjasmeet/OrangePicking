@@ -127,7 +127,7 @@ public class PlayLevelThree extends InitializeCode {
 
         }
         
-        if (lives <= 0) {
+        if (lives < 0) {
             super.addScore(super.score);
             sbg.enterState(gameOver);
         }
