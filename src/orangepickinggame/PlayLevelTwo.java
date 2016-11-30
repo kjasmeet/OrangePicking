@@ -48,6 +48,7 @@ public class PlayLevelTwo extends InitializeCode {
         super.y = 0;
         super.xHeight = 0;
         super.yHeight = 0;
+        
         lives = 3000;
         
     }
@@ -114,7 +115,7 @@ public class PlayLevelTwo extends InitializeCode {
             super.addScore(super.score);
             sbg.enterState(gameOver);
         }
-
+        
         for (int j = 0; j < numEnemies; j++) {
             // e[i].updateRectangle(update, j);
             if (player.intersects(e[j].getRectangle())) {

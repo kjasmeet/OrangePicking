@@ -9,7 +9,6 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
@@ -36,7 +35,7 @@ public class PlayLevelThree extends InitializeCode {
     int update = 0;
     
     int index = 0;
-    Point[] point = new Point[10000];
+    ArrayList<Point> point = new ArrayList<>();
     private Animation enemy;
 
     Enemy e[] = new Enemy[numEnemies];
@@ -94,16 +93,9 @@ public class PlayLevelThree extends InitializeCode {
         super.render(gc, sbg, grphcs);
         font.drawString(50, 20, "Level 3 - Watch where you step!" + getHighscore(), Color.yellow);
         
-//        for(Rectangle rect: rects){
-//            grphcs.setColor(Color.orange);
-//            grphcs.fill(rect);
-//            if(super.player.intersects(rect)){
-//                
-//            }
-//        }
         for(int i = 0; i < rects.size(); i++){
             grphcs.setColor(Color.orange);
-            if(point[i].pointX == xBox && point[i].pointY == yBox){
+            if(point.get(i).pointX == xBox && point.get(i).pointY == yBox){
                 grphcs.fill(rects.get(i));
             }
             
@@ -123,10 +115,10 @@ public class PlayLevelThree extends InitializeCode {
         super.update(gc, sbg, i);
         
         if(super.x >= 0 && super.y >= 0){
-            
-            point[index] = new Point(index, super.xBox, super.yBox);
+            point.add(index, new Point(index, super.xBox, super.yBox));
             rects.add(index, new Rectangle(super.x, super.y, 20, 20));
             index++;
+            
         }
         
         if (orangeGoal <= super.score) {
