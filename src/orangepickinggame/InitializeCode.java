@@ -50,7 +50,7 @@ public class InitializeCode extends BasicGameState{
     /* orange image to be placed for collection*/
     Image orange;
     /*defines a rectangle for sprite to be used in collision detection*/
-    Rectangle player = new Rectangle(x,y,25,25);
+    Rectangle player = new Rectangle(x,y,20,20);
     /*score of the current level*/
     int score = 0;
     /* number of oranges to be placed for collection*/
