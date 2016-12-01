@@ -37,6 +37,30 @@ public class Enemy {
         return y;
     }
     
+    public void setXVal(int lx){
+        x = x+ lx;
+        if(x>600){
+            x = x-600;
+            BoxX++;
+        }
+        else if(x<0){
+            x = x+600;
+            BoxX--;
+        }
+    }
+    
+    public void setYVal(int ly){
+        y = y+ ly;
+        if(y>600){
+            y = y-600;
+            BoxY++;
+        }
+        if(y<0){
+            y = y+600;
+            BoxY--;
+        }
+    }
+    
     public Rectangle getRectangle(){
         return enemyrec;
     }

@@ -38,6 +38,10 @@ public class PlayLevelThree extends InitializeCode {
     int update = 0;
     int flag = 0;
     int index = 0;
+    int xprev = 0;
+    int yprev = 0;
+    int x2prev = 0;
+    int y2prev = 0;
     ArrayList<Point> point = new ArrayList<>();
     private Animation enemy;
 
@@ -127,7 +131,7 @@ public class PlayLevelThree extends InitializeCode {
 
         if (super.x >= 0 && super.y >= 0) {
             point.add(index, new Point(index, super.xBox, super.yBox));
-            rects.add(index, new Rectangle(super.x, super.y, 20, 20));
+            rects.add(index, new Rectangle(x2prev, y2prev, 15, 15));
             index++;
 
         }
@@ -152,21 +156,62 @@ public class PlayLevelThree extends InitializeCode {
                 }
             }
         }
-
-        for (int d = 0; d < rects.size(); d++) {
-            if (point.get(d).pointX == xBox && point.get(d).pointY == yBox) {
-                if (player.intersects(rects.get(d))) {
-
-                }
-            }
-
-        }
-
-    }
+}
 
     /* change location of sprite based on key presses*/
     @Override
     public void keyPressed(int key, char c) {
+        x2prev = xprev;
+        y2prev = yprev;
+        xprev = x;
+        yprev = y;
         super.keyPressed(key, c);
+        for (int d = 0; d < (rects.size()); d++) {
+            if (point.get(d).pointX == xBox && point.get(d).pointY == yBox) {
+                if (player.intersects(rects.get(d))) {
+                    switch(key){
+                        case Input.KEY_LEFT:
+                            if (yHeight < 80 && x >= 590) {
+                            x = 10;
+                            yHeight += 20;
+                            yBox++;
+                            }else if(x < 590){
+                                x += 20;
+                                player.setX(x);
+                            }
+                        case Input.KEY_DOWN:
+                            if (y >= 20) {
+                                y -= 20;
+                                player.setY(y);
+                            }
+                            if (xHeight >= 4 && y <= 10) {
+                                y = 610;
+                                xHeight -= 20;
+                                xBox--;
+                            }
+                        case Input.KEY_UP:
+                            if (y >= 600 && xHeight < 80 ) {
+                                y = 20;
+                                xHeight += 20;
+                                xBox++;
+                            }else if(y < 600){
+                                y += 20;
+                                player.setY(y);
+                            }
+                        case Input.KEY_RIGHT:
+                            if (x >= 20) {
+                                x -= 20;
+                                player.setX(x);
+                            }
+                            if (yHeight >= 4 && x <= 10) {
+                                x = 590;
+                                yHeight -= 20;
+                                yBox--;
+                            }
+                    }
+                }
+            }
+        }
     }
 }
+
