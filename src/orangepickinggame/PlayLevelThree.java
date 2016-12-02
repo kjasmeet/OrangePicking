@@ -28,7 +28,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class PlayLevelThree extends InitializeCode {
     /* methods are defined, for the most part, in InitializeCode. This extends.*/
 
-    int orangeGoal = 1;
+    int orangeGoal = 10;
 
     ArrayList<Rectangle> rects = new ArrayList<>();
     int xrec = 0, yrec = 0;
@@ -165,12 +165,11 @@ public class PlayLevelThree extends InitializeCode {
         y2prev = yprev;
         xprev = x;
         yprev = y;
-        super.keyPressed(key, c);
         for (int d = 0; d < (rects.size()); d++) {
             if (point.get(d).pointX == xBox && point.get(d).pointY == yBox) {
                 if (player.intersects(rects.get(d))) {
-                    switch(key){
-                        case Input.KEY_LEFT:
+                    switch(keyPress){
+                        case LEFT:
                             if (yHeight < 80 && x >= 590) {
                             x = 10;
                             yHeight += 20;
@@ -179,7 +178,7 @@ public class PlayLevelThree extends InitializeCode {
                                 x += 20;
                                 player.setX(x);
                             }
-                        case Input.KEY_DOWN:
+                        case DOWN:
                             if (y >= 20) {
                                 y -= 20;
                                 player.setY(y);
@@ -189,7 +188,7 @@ public class PlayLevelThree extends InitializeCode {
                                 xHeight -= 20;
                                 xBox--;
                             }
-                        case Input.KEY_UP:
+                        case UP:
                             if (y >= 600 && xHeight < 80 ) {
                                 y = 20;
                                 xHeight += 20;
@@ -198,7 +197,7 @@ public class PlayLevelThree extends InitializeCode {
                                 y += 20;
                                 player.setY(y);
                             }
-                        case Input.KEY_RIGHT:
+                        case RIGHT:
                             if (x >= 20) {
                                 x -= 20;
                                 player.setX(x);
@@ -212,6 +211,7 @@ public class PlayLevelThree extends InitializeCode {
                 }
             }
         }
+        super.keyPressed(key, c);
     }
 }
 
