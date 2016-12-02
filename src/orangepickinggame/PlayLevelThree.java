@@ -28,13 +28,13 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class PlayLevelThree extends InitializeCode {
     /* methods are defined, for the most part, in InitializeCode. This extends.*/
 
-    int orangeGoal = 1;
+    int orangeGoal = 10;
 
     ArrayList<Rectangle> rects = new ArrayList<>();
     int xrec = 0, yrec = 0;
 
     int lives;
-    int numEnemies = 30;
+    int numEnemies = 100;
     int update = 0;
     int flag = 0;
     int index = 0;
@@ -80,10 +80,18 @@ public class PlayLevelThree extends InitializeCode {
         enemy = new Animation(en, duration, false);
 
         for (int i = 0; i < numEnemies; i++) {
-            int enemyValX = (int) (Math.random() * (600*5));
-            int enemyValY = (int) (Math.random() * (600*5));
-            e[i] = new Enemy(enemyValX, enemyValY, enemyValX/600, enemyValY/600, i, enemy);
-            
+            int enemyValX = (int) ((Math.random() * (600 * 5)) + 20);
+            int enemyValY = (int) ((Math.random() * (600 * 5)) + 20);
+            int xVal = enemyValX / 610;
+            int xxBox = xVal;
+            xVal *= 610;
+            enemyValX -= xVal;
+            int yVal = enemyValY / 620;
+            int yyBox = yVal;
+            yVal *= 620;
+            enemyValY -= yVal;
+            // System.out.printf("%d\t %d\t %d\t %d\t", enemyValX, enemyValY, xVal, yVal );
+            e[i] = new Enemy(enemyValX, enemyValY, xxBox, yyBox, i, enemy);
         }
     }
 
@@ -102,18 +110,28 @@ public class PlayLevelThree extends InitializeCode {
         }
 
         for (int i = 0; i < numEnemies; i++) {
-            if ((e[i].getXBox() == xBox) && (e[i].getYBox() == yBox)) {
-                
-                e[i].getAnim().draw(e[i].getXVal(), e[i].getYVal());
-                
-                if(e[i].getXVal() < 400){
-                    flag = 1;
-                    e[i].updateRectangle((update / 1000), e[i].getYVal());
-                }else if(e[i].getXVal() >= 400) {
-                    flag = 2;
-                    e[i].updateRectangle((update / 1000), e[i].getYVal());
+            if (i % 2 == 0) {
+                if ((e[i].getXBox() == xBox) && (e[i].getYBox() == yBox)) {
+                    e[i].getAnim().draw(e[i].getXVal(), e[i].getYVal());
+                    if (e[i].getXVal() < e[i].getFront()) {
+                        flag = 1;
+                        e[i].updateX((update / 1000));
+                    } else if (e[i].getXVal() >= e[i].getFront()) {
+                        flag = 2;
+                        e[i].updateX((update / 1000));
+                    }
                 }
-                
+            } else {
+                if ((e[i].getXBox() == xBox) && (e[i].getYBox() == yBox)) {
+                    e[i].getAnim().draw(e[i].getXVal(), e[i].getYVal());
+                    if (e[i].getYVal() < e[i].getUpAndDown()) {
+                        flag = 1;
+                        e[i].updateY((update / 1000));
+                    } else if (e[i].getYVal() >= e[i].getUpAndDown()) {
+                        flag = 2;
+                        e[i].updateY((update / 1000));
+                    }
+                }
             }
         }
     }
@@ -122,12 +140,11 @@ public class PlayLevelThree extends InitializeCode {
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         super.update(gc, sbg, i);
-        if(flag == 1){
+        if (flag == 1) {
             update += i;
-        }else if(flag == 2){
+        } else if (flag == 2) {
             update -= i;
         }
-        
 
         if (super.x >= 0 && super.y >= 0) {
             point.add(index, new Point(index, super.xBox, super.yBox));
@@ -156,11 +173,12 @@ public class PlayLevelThree extends InitializeCode {
                 }
             }
         }
-}
+    }
 
     /* change location of sprite based on key presses*/
     @Override
-    public void keyPressed(int key, char c) {
+    public void keyPressed(int key, char c
+    ) {
         x2prev = xprev;
         y2prev = yprev;
         xprev = x;
@@ -169,13 +187,13 @@ public class PlayLevelThree extends InitializeCode {
         for (int d = 0; d < (rects.size()); d++) {
             if (point.get(d).pointX == xBox && point.get(d).pointY == yBox) {
                 if (player.intersects(rects.get(d))) {
-                    switch(key){
+                    switch (key) {
                         case Input.KEY_LEFT:
                             if (yHeight < 80 && x >= 590) {
-                            x = 10;
-                            yHeight += 20;
-                            yBox++;
-                            }else if(x < 590){
+                                x = 10;
+                                yHeight += 20;
+                                yBox++;
+                            } else if (x < 590) {
                                 x += 20;
                                 player.setX(x);
                             }
@@ -190,11 +208,11 @@ public class PlayLevelThree extends InitializeCode {
                                 xBox--;
                             }
                         case Input.KEY_UP:
-                            if (y >= 600 && xHeight < 80 ) {
+                            if (y >= 600 && xHeight < 80) {
                                 y = 20;
                                 xHeight += 20;
                                 xBox++;
-                            }else if(y < 600){
+                            } else if (y < 600) {
                                 y += 20;
                                 player.setY(y);
                             }
@@ -214,4 +232,3 @@ public class PlayLevelThree extends InitializeCode {
         }
     }
 }
-

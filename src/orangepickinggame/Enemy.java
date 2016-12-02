@@ -17,16 +17,28 @@ public class Enemy {
     private Rectangle enemyrec;
     int x, y, BoxX, BoxY, index;
     private Animation anim;
+    int front;
+    int upAndDown;
     int dr;
     
     public Enemy(int xl, int yl, int xbox, int ybox, int ind, Animation image){
         enemyrec = new Rectangle(xl,yl,25,25);
         x = xl;
         y = yl;
+        front += x + 70;
+        upAndDown += y + 70;
         index = ind;
         BoxX = xbox;
         BoxY = ybox;
         anim = image;
+    }
+    
+    public int getFront(){
+        return front;
+    }
+    
+    public int getUpAndDown(){
+        return upAndDown;
     }
     
     public int getXVal(){
@@ -38,15 +50,15 @@ public class Enemy {
     }
     
     public void setXVal(int lx){
-        x = x+ lx;
-        if(x>600){
-            x = x-600;
-            BoxX++;
-        }
-        else if(x<0){
-            x = x+600;
-            BoxX--;
-        }
+        x = x + lx;
+//        if(x>600){
+//            x = x-600;
+//            BoxX++;
+//        }
+//        else if(x<0){
+//            x = x+600;
+//            BoxX--;
+//        }
     }
     
     public void setYVal(int ly){
@@ -73,26 +85,13 @@ public class Enemy {
         return BoxY;
     }
     
-    public void updateRectangle(int plusX, int plusY){
+    public void updateX(int plusX){
         x += plusX;
-        //y +=plusY;
-//        if(x>=580){
-//            BoxX++;
-//            x-=580;
-//        }
-//        if(y>=580){
-//            BoxY++;
-//            y-=580;
-//        }
-//        if(BoxX>4){
-//            BoxX=0;
-//            x = 20;
-//        }
-//        if(BoxY>4){
-//            BoxY=0;
-//            y = 20;
-//        }
         enemyrec.setX(x);
+    }
+    
+    public void updateY(int plusY){
+        y += plusY;
         enemyrec.setY(y);
     }
     
