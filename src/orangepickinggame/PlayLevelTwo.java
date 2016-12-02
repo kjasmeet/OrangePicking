@@ -25,9 +25,9 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class PlayLevelTwo extends InitializeCode {
     /* methods are defined, for the most part, in InitializeCode. This extends.*/
 
-    int orangeGoal = 1;
-    int lives;
-    int numEnemies = 30;
+    int orangeGoal = 7;
+    double lives;
+    int numEnemies = 100;
     int flag = 0;
     int update = 0;
 
@@ -49,9 +49,9 @@ public class PlayLevelTwo extends InitializeCode {
         super.y = 0;
         super.xHeight = 0;
         super.yHeight = 0;
-        
+
         lives = 3000;
-        
+
     }
 
     @Override
@@ -69,10 +69,18 @@ public class PlayLevelTwo extends InitializeCode {
         enemy = new Animation(en, duration, false);
 
         for (int i = 0; i < numEnemies; i++) {
-            int enemyValX = (int) (Math.random() * (600*5));
-            int enemyValY = (int) (Math.random() * (600*5));
-            e[i] = new Enemy(enemyValX, enemyValY, enemyValX/600, enemyValY/600, i, enemy);
-           
+            int enemyValX = (int) ((Math.random() * (600 * 5)) + 20);
+            int enemyValY = (int) ((Math.random() * (600 * 5)) + 20);
+            int xVal = enemyValX / 610;
+            int xxBox = xVal;
+            xVal *= 610;
+            enemyValX -= xVal;
+            int yVal = enemyValY / 620;
+            int yyBox = yVal;
+            yVal *= 620;
+            enemyValY -= yVal;
+            // System.out.printf("%d\t %d\t %d\t %d\t", enemyValX, enemyValY, xVal, yVal );
+            e[i] = new Enemy(enemyValX, enemyValY, xxBox, yyBox, i, enemy);
         }
     }
 
@@ -83,19 +91,42 @@ public class PlayLevelTwo extends InitializeCode {
         font.drawString(420, 80, "Lives left: " + lives / 1000, Color.yellow);
         font.drawString(50, 20, "Level 2 - Avoid the enemies!" + update, Color.yellow);
 
-        
         for (int i = 0; i < numEnemies; i++) {
-            if ((e[i].getXBox() == xBox) && (e[i].getYBox() == yBox)) {
-                e[i].getAnim().draw(e[i].getXVal(), e[i].getYVal());
-                if(e[i].getXVal() < 400){
-                    flag = 1;
-                    e[i].updateRectangle((update / 1000), e[i].getYVal());
-                }else if(e[i].getXVal() >= 400) {
-                    flag = 2;
-                    e[i].updateRectangle((update / 1000), e[i].getYVal());
+            if (i % 3 == 0) {
+                if ((e[i].getXBox() == xBox) && (e[i].getYBox() == yBox)) {
+                    e[i].getAnim().draw(e[i].getXVal(), e[i].getYVal());
+                    if (e[i].getXVal() < e[i].getFront()) {
+                        flag = 1;
+                        e[i].updateX((update / 1000));
+                    } else if (e[i].getXVal() >= e[i].getFront()) {
+                        flag = 2;
+                        e[i].updateX((update / 1000));
+                    }
                 }
-               
+            } else if(i % 3 == 1) {
+                if ((e[i].getXBox() == xBox) && (e[i].getYBox() == yBox)) {
+                    e[i].getAnim().draw(e[i].getXVal(), e[i].getYVal());
+                    if (e[i].getYVal() < e[i].getUpAndDown()) {
+                        flag = 1;
+                        e[i].updateY((update / 1000));
+                    } else if (e[i].getYVal() >= e[i].getUpAndDown()) {
+                        flag = 2;
+                        e[i].updateY((update / 1000));
+                    }
+                }
+            }else if(i % 3 == 2){
+                if ((e[i].getXBox() == xBox) && (e[i].getYBox() == yBox)) {
+                    e[i].getAnim().draw(e[i].getXVal(), e[i].getYVal());
+                    if (e[i].getXVal() < e[i].getFront() && e[i].getYVal() < e[i].getUpAndDown()) {
+                        flag = 1;
+                        e[i].updateXandY((update / 1000), (update / 1000));
+                    } else {
+                        flag = 2;
+                        e[i].updateXandY((update / 1000), (update / 1000));
+                    }
+                }
             }
+
         }
     }
 
@@ -103,13 +134,12 @@ public class PlayLevelTwo extends InitializeCode {
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         super.update(gc, sbg, i);
-        
-        if(flag == 1){
+
+        if (flag == 1) {
             update += i;
-        }else if(flag == 2){
+        } else if (flag == 2) {
             update -= i;
         }
-        
         /* move to new level if goal is accomplished*/
         if (orangeGoal <= super.score) {
             state = 2;
@@ -122,17 +152,22 @@ public class PlayLevelTwo extends InitializeCode {
             super.addScore(super.score);
             sbg.enterState(gameOver);
         }
-        
+
+        if (isIntersect()) {
+            lives -= i;
+        }
+
+    }
+
+    public boolean isIntersect() {
         for (int j = 0; j < numEnemies; j++) {
-            // e[i].updateRectangle(update, j);
             if (player.intersects(e[j].getRectangle())) {
                 if ((e[j].getXBox() == xBox) && (e[j].getYBox() == yBox)) {
-                    lives -= i * 5;
-                    super.x = 0;
-                    super.y = 0;
+                    return true;
                 }
             }
         }
+        return false;
     }
 
     /* change location of sprite based on key presses*/
@@ -140,4 +175,5 @@ public class PlayLevelTwo extends InitializeCode {
     public void keyPressed(int key, char c) {
         super.keyPressed(key, c);
     }
+
 }
