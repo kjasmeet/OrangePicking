@@ -18,7 +18,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class Play extends InitializeCode {
     
     /* methods are defined, for the most part, in InitializeCode. This extends.*/
-    int orangeGoal = 5;
+    int orangeGoal = 0;
     
     /* constructor for level*/
     public Play(int playState) {

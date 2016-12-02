@@ -25,7 +25,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class PlayLevelTwo extends InitializeCode {
     /* methods are defined, for the most part, in InitializeCode. This extends.*/
 
-    int orangeGoal = 7;
+    int orangeGoal = 2;
     double lives;
     int numEnemies = 100;
     int flag = 0;
@@ -154,15 +154,39 @@ public class PlayLevelTwo extends InitializeCode {
         }
 
         if (isIntersect()) {
-            lives -= i;
+            lives = decrementLife(lives, i);
+            delay(i);
         }
 
+    }
+
+    public double decrementLife(double life, int delta) {
+        double ms = 1000.0;
+        while (ms > 0) {
+            ms -= delta * .5f;
+            life -= delta * .5f;
+        }
+
+        System.out.printf("%f\t%f\t\n", ms, life);
+        return life;
+    }
+
+    public void delay(int delta) {
+        double ms = 1000.0;
+        while (ms > 0) {
+            ms -= delta * .1f;
+            System.out.println(ms);
+        }
     }
 
     public boolean isIntersect() {
         for (int j = 0; j < numEnemies; j++) {
             if (player.intersects(e[j].getRectangle())) {
                 if ((e[j].getXBox() == xBox) && (e[j].getYBox() == yBox)) {
+                    player.setX(10*1.0f);
+                    player.setY(10*1.0f);
+                    super.x = 0;
+                    super.y = 0;
                     return true;
                 }
             }

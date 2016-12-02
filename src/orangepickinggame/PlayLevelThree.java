@@ -33,7 +33,7 @@ public class PlayLevelThree extends InitializeCode {
     ArrayList<Rectangle> rects = new ArrayList<>();
     int xrec = 0, yrec = 0;
 
-    int lives;
+    double lives;
     int numEnemies = 200;
     int update = 0;
     int flag = 0;
@@ -174,15 +174,10 @@ public class PlayLevelThree extends InitializeCode {
             super.addScore(super.score);
             sbg.enterState(gameOver);
         }
-
-        for (int j = 0; j < numEnemies; j++) {
-            if (player.intersects(e[j].getRectangle())) {
-                if ((e[j].getXBox() == xBox) && (e[j].getYBox() == yBox)) {
-                    lives -= i * 5;
-                    super.x = 0;
-                    super.y = 0;
-                }
-            }
+        
+        if (isIntersect()) {
+            lives = decrementLife(lives, i);
+            delay(i);
         }
     }
 
@@ -241,5 +236,39 @@ public class PlayLevelThree extends InitializeCode {
             }
         }
         super.keyPressed(key, c);
+    }
+
+    public boolean isIntersect() {
+        for (int j = 0; j < numEnemies; j++) {
+            if (player.intersects(e[j].getRectangle())) {
+                if ((e[j].getXBox() == xBox) && (e[j].getYBox() == yBox)) {
+                    player.setX(10 * 1.0f);
+                    player.setY(10 * 1.0f);
+                    super.x = 0;
+                    super.y = 0;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void delay(int delta) {
+        double ms = 1000.0;
+        while (ms > 0) {
+            ms -= delta * .1f;
+            System.out.println(ms);
+        }
+    }
+
+    public double decrementLife(double life, int delta) {
+        double ms = 1000.0;
+        while (ms > 0) {
+            ms -= delta * .5f;
+            life -= delta * .5f;
+        }
+
+        System.out.printf("%f\t%f\t\n", ms, life);
+        return life;
     }
 }
