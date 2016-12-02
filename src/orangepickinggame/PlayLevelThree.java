@@ -34,7 +34,7 @@ public class PlayLevelThree extends InitializeCode {
     int xrec = 0, yrec = 0;
 
     int lives;
-    int numEnemies = 100;
+    int numEnemies = 200;
     int update = 0;
     int flag = 0;
     int index = 0;
@@ -110,7 +110,7 @@ public class PlayLevelThree extends InitializeCode {
         }
 
         for (int i = 0; i < numEnemies; i++) {
-            if (i % 2 == 0) {
+            if (i % 3 == 0) {
                 if ((e[i].getXBox() == xBox) && (e[i].getYBox() == yBox)) {
                     e[i].getAnim().draw(e[i].getXVal(), e[i].getYVal());
                     if (e[i].getXVal() < e[i].getFront()) {
@@ -121,7 +121,7 @@ public class PlayLevelThree extends InitializeCode {
                         e[i].updateX((update / 1000));
                     }
                 }
-            } else {
+            } else if (i % 3 == 1) {
                 if ((e[i].getXBox() == xBox) && (e[i].getYBox() == yBox)) {
                     e[i].getAnim().draw(e[i].getXVal(), e[i].getYVal());
                     if (e[i].getYVal() < e[i].getUpAndDown()) {
@@ -130,6 +130,17 @@ public class PlayLevelThree extends InitializeCode {
                     } else if (e[i].getYVal() >= e[i].getUpAndDown()) {
                         flag = 2;
                         e[i].updateY((update / 1000));
+                    }
+                }
+            } else if (i % 3 == 2) {
+                if ((e[i].getXBox() == xBox) && (e[i].getYBox() == yBox)) {
+                    e[i].getAnim().draw(e[i].getXVal(), e[i].getYVal());
+                    if (e[i].getXVal() < e[i].getFront() && e[i].getYVal() < e[i].getUpAndDown()) {
+                        flag = 1;
+                        e[i].updateXandY((update / 1000), (update / 1000));
+                    } else {
+                        flag = 2;
+                        e[i].updateXandY((update / 1000), (update / 1000));
                     }
                 }
             }

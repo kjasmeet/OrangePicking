@@ -27,7 +27,7 @@ public class PlayLevelTwo extends InitializeCode {
 
     int orangeGoal = 7;
     double lives;
-    int numEnemies = 50;
+    int numEnemies = 100;
     int flag = 0;
     int update = 0;
 
@@ -92,7 +92,7 @@ public class PlayLevelTwo extends InitializeCode {
         font.drawString(50, 20, "Level 2 - Avoid the enemies!" + update, Color.yellow);
 
         for (int i = 0; i < numEnemies; i++) {
-            if (i % 2 == 0) {
+            if (i % 3 == 0) {
                 if ((e[i].getXBox() == xBox) && (e[i].getYBox() == yBox)) {
                     e[i].getAnim().draw(e[i].getXVal(), e[i].getYVal());
                     if (e[i].getXVal() < e[i].getFront()) {
@@ -103,7 +103,7 @@ public class PlayLevelTwo extends InitializeCode {
                         e[i].updateX((update / 1000));
                     }
                 }
-            }else{
+            } else if(i % 3 == 1) {
                 if ((e[i].getXBox() == xBox) && (e[i].getYBox() == yBox)) {
                     e[i].getAnim().draw(e[i].getXVal(), e[i].getYVal());
                     if (e[i].getYVal() < e[i].getUpAndDown()) {
@@ -112,6 +112,17 @@ public class PlayLevelTwo extends InitializeCode {
                     } else if (e[i].getYVal() >= e[i].getUpAndDown()) {
                         flag = 2;
                         e[i].updateY((update / 1000));
+                    }
+                }
+            }else if(i % 3 == 2){
+                if ((e[i].getXBox() == xBox) && (e[i].getYBox() == yBox)) {
+                    e[i].getAnim().draw(e[i].getXVal(), e[i].getYVal());
+                    if (e[i].getXVal() < e[i].getFront() && e[i].getYVal() < e[i].getUpAndDown()) {
+                        flag = 1;
+                        e[i].updateXandY((update / 1000), (update / 1000));
+                    } else {
+                        flag = 2;
+                        e[i].updateXandY((update / 1000), (update / 1000));
                     }
                 }
             }

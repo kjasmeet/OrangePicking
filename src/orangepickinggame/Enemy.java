@@ -95,6 +95,13 @@ public class Enemy {
         enemyrec.setY(y);
     }
     
+    public void updateXandY(int updatex, int updatey){
+        x += updatex;
+        y += updatey;
+        enemyrec.setX(x);
+        enemyrec.setY(y);
+    }
+    
     public Animation getAnim(){
         return anim;
     }
