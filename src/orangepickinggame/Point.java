@@ -6,7 +6,7 @@
 package orangepickinggame;
 
 /**
- *
+ * This class will be used to store the x and y movement of the player
  * @author JasmeetKaur
  */
 public class Point {

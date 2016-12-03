@@ -263,14 +263,27 @@ public class InitializeCode extends BasicGameState{
         }
     }
     
+    /**
+     * sets the variable high score
+     * @param highscore 
+     */
     public void setHighscore(int highscore){
         this.highscore = highscore;
     }
     
+    /**
+     * gets high score of game
+     * @return highscore
+     */
     public int getHighscore(){
         return highscore;
     }
     
+    /**
+     * add the current high score with the new score
+     * @param currentScore
+     * @return 
+     */
     public int addScore(int currentScore){
         highscore = highscore + currentScore;
         return highscore;

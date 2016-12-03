@@ -14,7 +14,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- *
+ * This screen presents when the player completes all 3 levels
  * @author JasmeetKaur
  */
 public class Congratulations extends BasicGameState {
@@ -32,6 +32,13 @@ public class Congratulations extends BasicGameState {
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
     }
 
+    /**
+     * render method shows the high score to the user
+     * @param gc
+     * @param sbg
+     * @param grphcs
+     * @throws SlickException 
+     */
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         grphcs.drawString("Congratutions! You won!!", 100, 100);

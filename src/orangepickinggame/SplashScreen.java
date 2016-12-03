@@ -112,7 +112,7 @@ public class SplashScreen extends BasicGameState {
     }
 
     /**
-     * Begins the transition to the window based on the value of int. 
+     * Begins the transition to the window based on the value of state. 
      * @param gc
      * @param sbg
      * @param i

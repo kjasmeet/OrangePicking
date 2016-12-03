@@ -91,6 +91,11 @@ public class PlayLevelTwo extends InitializeCode {
         font.drawString(420, 80, "Lives left: " + lives / 1000, Color.yellow);
         font.drawString(50, 20, "Level 2 - Avoid the enemies!" + update, Color.yellow);
 
+        /**
+         * this loop divides numEnemies by 3 so that 1/3 of them
+         * can go up and down, 1/3 of them can go left and right, and the rest can go
+         * diagonal
+         */
         for (int i = 0; i < numEnemies; i++) {
             if (i % 3 == 0) {
                 if ((e[i].getXBox() == xBox) && (e[i].getYBox() == yBox)) {
@@ -160,6 +165,12 @@ public class PlayLevelTwo extends InitializeCode {
 
     }
 
+    /**
+     * if the player was in contact with enemy, decrease his life by one
+     * @param life
+     * @param delta
+     * @return life
+     */
     public double decrementLife(double life, int delta) {
         double ms = 1000.0;
         while (ms > 0) {
@@ -171,6 +182,10 @@ public class PlayLevelTwo extends InitializeCode {
         return life;
     }
 
+    /**
+     * delays game for one second
+     * @param delta 
+     */
     public void delay(int delta) {
         double ms = 1000.0;
         while (ms > 0) {
@@ -179,6 +194,10 @@ public class PlayLevelTwo extends InitializeCode {
         }
     }
 
+    /**
+     * returns true if the player was in contact with enemy, false otherwise
+     * @return 
+     */
     public boolean isIntersect() {
         for (int j = 0; j < numEnemies; j++) {
             if (player.intersects(e[j].getRectangle())) {

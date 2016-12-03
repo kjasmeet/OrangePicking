@@ -99,6 +99,8 @@ public class PlayLevelThree extends InitializeCode {
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         super.render(gc, sbg, grphcs);
+        
+        font.drawString(420, 80, "Lives left: " + lives / 1000, Color.yellow);
         font.drawString(50, 20, "Level 3 - Watch where you step!" + getHighscore(), Color.yellow);
 
         for (int i = 0; i < rects.size(); i++) {
@@ -109,6 +111,11 @@ public class PlayLevelThree extends InitializeCode {
 
         }
 
+        /**
+         * this loop divides numEnemies by 3 so that 1/3 of them
+         * can go up and down, 1/3 of them can go left and right, and the rest can go
+         * diagonal
+         */
         for (int i = 0; i < numEnemies; i++) {
             if (i % 3 == 0) {
                 if ((e[i].getXBox() == xBox) && (e[i].getYBox() == yBox)) {
@@ -175,6 +182,7 @@ public class PlayLevelThree extends InitializeCode {
             sbg.enterState(gameOver);
         }
         
+        //checks if the player came in contact with enemy
         if (isIntersect()) {
             lives = decrementLife(lives, i);
             delay(i);
@@ -238,6 +246,10 @@ public class PlayLevelThree extends InitializeCode {
         super.keyPressed(key, c);
     }
 
+    /**
+     * Checks if the player has been in contact with the enemy
+     * @return boolean
+     */
     public boolean isIntersect() {
         for (int j = 0; j < numEnemies; j++) {
             if (player.intersects(e[j].getRectangle())) {
@@ -253,6 +265,10 @@ public class PlayLevelThree extends InitializeCode {
         return false;
     }
 
+    /**
+     * delays the game for one second
+     * @param delta 
+     */
     public void delay(int delta) {
         double ms = 1000.0;
         while (ms > 0) {
@@ -261,6 +277,13 @@ public class PlayLevelThree extends InitializeCode {
         }
     }
 
+    /**
+     * if the player has been in contact with the enemy, 
+     * life is decremented by 1
+     * @param life
+     * @param delta
+     * @return life
+     */
     public double decrementLife(double life, int delta) {
         double ms = 1000.0;
         while (ms > 0) {
