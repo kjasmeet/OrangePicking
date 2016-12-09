@@ -25,7 +25,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class PlayLevelTwo extends InitializeCode {
     /* methods are defined, for the most part, in InitializeCode. This extends.*/
 
-    int orangeGoal = 2;
+    int orangeGoal = 7;
     double lives;
     int numEnemies = 100;
     int flag = 0;
