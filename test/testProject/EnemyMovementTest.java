@@ -13,7 +13,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 /**
- *
+ * this class tests how basic sprite images move
  * @author JasmeetKaur
  */
 public class EnemyMovementTest extends BasicGame{
@@ -27,11 +27,22 @@ public class EnemyMovementTest extends BasicGame{
         super(title);
     }
 
+    /**
+     * initialization of butterfly image
+     * @param gc
+     * @throws SlickException 
+     */
     @Override
     public void init(GameContainer gc) throws SlickException {
         butterfly = new Image("TestImages/butterfly1.png");
     }
 
+    /**
+     * according to the value of x, set flags
+     * @param gc
+     * @param i
+     * @throws SlickException 
+     */
     @Override
     public void update(GameContainer gc, int i) throws SlickException {
         if(x < 500){
@@ -45,12 +56,22 @@ public class EnemyMovementTest extends BasicGame{
         System.out.println(x);
     }
 
+    /**
+     * draw on screen
+     * @param gc
+     * @param grphcs
+     * @throws SlickException 
+     */
     @Override
     public void render(GameContainer gc, Graphics grphcs) throws SlickException {
         butterfly.draw(x, 400);
         
     }
     
+    /**
+     * according to the value of flag, move the sprite
+     * @param delta 
+     */
     public void moveHorizontal(int delta){
         if(flag == 1){
             x+=delta * .5f;
@@ -65,6 +86,10 @@ public class EnemyMovementTest extends BasicGame{
         }
     }
     
+    /**
+     * start of program
+     * @param argv 
+     */
     public static void main(String[] argv) {
         try {
             AppGameContainer container = new AppGameContainer(new EnemyMovementTest("Testing enemy movement"));
