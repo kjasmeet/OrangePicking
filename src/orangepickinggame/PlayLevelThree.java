@@ -42,6 +42,8 @@ public class PlayLevelThree extends InitializeCode {
     int yprev = 0;
     int x2prev = 0;
     int y2prev = 0;
+    int x3prev = 0;
+    int y3prev = 0;
     ArrayList<Point> point = new ArrayList<>();
     private Animation enemy;
 
@@ -104,7 +106,7 @@ public class PlayLevelThree extends InitializeCode {
         font.drawString(50, 20, "Level 3 - Watch where you step!" + getHighscore(), Color.yellow);
 
         for (int i = 0; i < rects.size(); i++) {
-            grphcs.setColor(Color.orange);
+            grphcs.setColor(Color.black);
             if (point.get(i).pointX == xBox && point.get(i).pointY == yBox) {
                 grphcs.fill(rects.get(i));
             }
@@ -164,13 +166,6 @@ public class PlayLevelThree extends InitializeCode {
             update -= i;
         }
 
-        if (super.x >= 0 && super.y >= 0) {
-            point.add(index, new Point(index, super.xBox, super.yBox));
-            rects.add(index, new Rectangle(x2prev, y2prev, 15, 15));
-            index++;
-
-        }
-
         if (orangeGoal <= super.score) {
             super.addScore(super.score);
             sbg.enterState(congrats, new FadeOutTransition(Color.decode("#2fc38b")), new FadeInTransition(Color.black));
@@ -191,59 +186,47 @@ public class PlayLevelThree extends InitializeCode {
 
     /* change location of sprite based on key presses*/
     @Override
-    public void keyPressed(int key, char c
-    ) {
-        x2prev = xprev;
-        y2prev = yprev;
-        xprev = x;
-        yprev = y;
-        for (int d = 0; d < (rects.size()); d++) {
-            if (point.get(d).pointX == xBox && point.get(d).pointY == yBox) {
-                if (player.intersects(rects.get(d))) {
-                    switch (key) {
-                        case Input.KEY_LEFT:
-                            if (yHeight < 80 && x >= 590) {
-                                x = 10;
-                                yHeight += 20;
-                                yBox++;
-                            } else if (x < 590) {
-                                x += 20;
-                                player.setX(x);
-                            }
-                        case DOWN:
-                            if (y >= 20) {
-                                y -= 20;
-                                player.setY(y);
-                            }
-                            if (xHeight >= 4 && y <= 10) {
-                                y = 610;
-                                xHeight -= 20;
-                                xBox--;
-                            }
-                        case Input.KEY_UP:
-                            if (y >= 600 && xHeight < 80) {
-                                y = 20;
-                                xHeight += 20;
-                                xBox++;
-                            } else if (y < 600) {
-                                y += 20;
-                                player.setY(y);
-                            }
-                        case RIGHT:
-                            if (x >= 20) {
-                                x -= 20;
-                                player.setX(x);
-                            }
-                            if (yHeight >= 4 && x <= 10) {
-                                x = 590;
-                                yHeight -= 20;
-                                yBox--;
-                            }
+    public void keyPressed(int key, char c) {
+        boolean isBlocked = false;
+        if((key == Input.KEY_LEFT)||(key == Input.KEY_RIGHT)||(key == Input.KEY_UP)||(key == Input.KEY_DOWN)){
+        
+            Rectangle newMove = new Rectangle(-20,-20,20,20);
+        
+            if (x3prev >= 0 && y3prev >= 0) {
+                Rectangle newBox = new Rectangle(x3prev, y3prev, 15, 15);
+                point.add(index, new Point(index, super.xBox, super.yBox));
+                rects.add(index, newBox);
+                index++;
+            }
+            
+            switch(key){
+                    case Input.KEY_LEFT:
+                        newMove = new Rectangle(x-20,y,20,20);
+                    case Input.KEY_RIGHT:
+                        newMove = new Rectangle(x+20,y,20,20);
+                    case Input.KEY_UP:
+                        newMove = new Rectangle(x,y-20,20,20);
+                    case Input.KEY_DOWN:
+                        newMove = new Rectangle(x,y+20,20,20);
+            }
+                            
+            for (int d = 0; d < (rects.size()); d++) {
+                if (point.get(d).pointX == xBox && point.get(d).pointY == yBox) {
+                    if (newMove.intersects(rects.get(d))) {
+                        isBlocked = true;
                     }
                 }
             }
+            x3prev = x2prev;
+            y3prev = y2prev;
+            x2prev = xprev;
+            y2prev = yprev;
+            xprev = x;
+            yprev = y;
         }
-        super.keyPressed(key, c);
+        if(!isBlocked){
+            super.keyPressed(key, c);
+        }
     }
 
     /**
