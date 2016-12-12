@@ -188,45 +188,87 @@ public class PlayLevelThree extends InitializeCode {
     @Override
     public void keyPressed(int key, char c) {
         boolean isBlocked = false;
-        if((key == Input.KEY_LEFT)||(key == Input.KEY_RIGHT)||(key == Input.KEY_UP)||(key == Input.KEY_DOWN)){
-        
-            Rectangle newMove = new Rectangle(-20,-20,20,20);
-        
-            if (x3prev >= 0 && y3prev >= 0) {
-                Rectangle newBox = new Rectangle(x3prev, y3prev, 15, 15);
-                point.add(index, new Point(index, super.xBox, super.yBox));
-                rects.add(index, newBox);
-                index++;
-            }
+
+        Rectangle newMove;
             
-            switch(key){
-                    case Input.KEY_LEFT:
-                        newMove = new Rectangle(x-20,y,20,20);
-                    case Input.KEY_RIGHT:
-                        newMove = new Rectangle(x+20,y,20,20);
-                    case Input.KEY_UP:
-                        newMove = new Rectangle(x,y-20,20,20);
-                    case Input.KEY_DOWN:
-                        newMove = new Rectangle(x,y+20,20,20);
-            }
+        switch(key){
+            case Input.KEY_LEFT:
+                newMove = new Rectangle(x-20,y,20,20);
+                if (x3prev >= 0 && y3prev >= 0) {
+                    Rectangle newBox = new Rectangle(x3prev, y3prev, 15, 15);
+                    point.add(index, new Point(index, super.xBox, super.yBox));
+                    rects.add(index, newBox);
+                    index++;
+                }
+                x3prev = x2prev;
+                y3prev = y2prev;
+                x2prev = xprev;
+                y2prev = yprev;
+                xprev = x;
+                yprev = y;
+                break;
+            case Input.KEY_RIGHT:
+                newMove = new Rectangle(x+20,y,20,20);
+                if (x3prev >= 0 && y3prev >= 0) {
+                    Rectangle newBox = new Rectangle(x3prev, y3prev, 15, 15);
+                    point.add(index, new Point(index, super.xBox, super.yBox));
+                    rects.add(index, newBox);
+                    index++;
+                }
+                x3prev = x2prev;
+                y3prev = y2prev;
+                x2prev = xprev;
+                y2prev = yprev;
+                xprev = x;
+                yprev = y;
+                break;
+            case Input.KEY_UP:
+                newMove = new Rectangle(x,y-20,20,20);
+                if (x3prev >= 0 && y3prev >= 0) {
+                    Rectangle newBox = new Rectangle(x3prev, y3prev, 15, 15);
+                    point.add(index, new Point(index, super.xBox, super.yBox));
+                    rects.add(index, newBox);
+                    index++;
+                }
+                x3prev = x2prev;
+                y3prev = y2prev;
+                x2prev = xprev;
+                y2prev = yprev;
+                xprev = x;
+                yprev = y;
+                break;
+            case Input.KEY_DOWN:
+                newMove = new Rectangle(x,y+20,20,20);
+                if (x3prev >= 0 && y3prev >= 0) {
+                    Rectangle newBox = new Rectangle(x3prev, y3prev, 15, 15);
+                    point.add(index, new Point(index, super.xBox, super.yBox));
+                    rects.add(index, newBox);
+                    index++;
+                }
+                x3prev = x2prev;
+                y3prev = y2prev;
+                x2prev = xprev;
+                y2prev = yprev;
+                xprev = x;
+                yprev = y;
+                break;
+            default:
+                newMove = new Rectangle(-20,-20,20,20);
+                break;
+                
+        }
                             
-            for (int d = 0; d < (rects.size()); d++) {
-                if (point.get(d).pointX == xBox && point.get(d).pointY == yBox) {
-                    if (newMove.intersects(rects.get(d))) {
-                        isBlocked = true;
-                    }
+        for (int d = 0; d < (rects.size()); d++) {
+            if (point.get(d).pointX == xBox && point.get(d).pointY == yBox) {
+                if (newMove.intersects(rects.get(d))) {
+                    isBlocked = true;
                 }
             }
-            x3prev = x2prev;
-            y3prev = y2prev;
-            x2prev = xprev;
-            y2prev = yprev;
-            xprev = x;
-            yprev = y;
         }
-        if(!isBlocked){
-            super.keyPressed(key, c);
-        }
+
+     if(isBlocked==false){
+         super.keyPressed(key, c);
+     }
     }
 
     /**
