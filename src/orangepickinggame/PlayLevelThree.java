@@ -254,7 +254,6 @@ public class PlayLevelThree extends InitializeCode {
                 break;
             default:
                 newMove = new Rectangle(-20,-20,20,20);
-                break;
                 
         }
                             
