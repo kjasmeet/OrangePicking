@@ -88,7 +88,7 @@ public class PlayLevelTwo extends InitializeCode {
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         super.render(gc, sbg, grphcs);
-        font.drawString(420, 80, "Lives left: " + lives / 1000, Color.yellow);
+        font.drawString(420, 80, "Lives left: " + (int) Math.ceil(lives / 1000), Color.yellow);
         font.drawString(50, 20, "Level 2 - Avoid the enemies!" + update, Color.yellow);
 
         /**

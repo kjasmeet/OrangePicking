@@ -102,7 +102,7 @@ public class PlayLevelThree extends InitializeCode {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         super.render(gc, sbg, grphcs);
         
-        font.drawString(420, 80, "Lives left: " + lives / 1000, Color.yellow);
+        font.drawString(420, 80, "Lives left: " + (int) Math.ceil(lives / 1000), Color.yellow);
         font.drawString(50, 20, "Level 3 - Watch where you step!" + getHighscore(), Color.yellow);
 
         for (int i = 0; i < rects.size(); i++) {
@@ -254,6 +254,7 @@ public class PlayLevelThree extends InitializeCode {
                 break;
             default:
                 newMove = new Rectangle(-20,-20,20,20);
+                break;
                 
         }
                             
